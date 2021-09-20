@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Istio 整体架构 · Istio Handbook - Istio 开发指南</title>
+        <title>基于 WASM 扩展 Envoy · Istio Handbook - Istio 开发指南</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -87,10 +87,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="dataplane.html" />
     
-    
-    <link rel="prev" href="../servicemesh/framework-contrast.html" />
+    <link rel="prev" href="../traffic/config/sidecar.html" />
     
 
     
@@ -231,9 +229,9 @@
         
         
     
-        <li class="chapter active" data-level="4.1" data-path="istio-architecture.html">
+        <li class="chapter " data-level="4.1" data-path="../architecture/istio-architecture.html">
             
-                <a href="istio-architecture.html">
+                <a href="../architecture/istio-architecture.html">
             
                     
                         <b>4.1.</b>
@@ -246,9 +244,9 @@
             
         </li>
     
-        <li class="chapter " data-level="4.2" data-path="dataplane.html">
+        <li class="chapter " data-level="4.2" data-path="../architecture/dataplane.html">
             
-                <a href="dataplane.html">
+                <a href="../architecture/dataplane.html">
             
                     
                         <b>4.2.</b>
@@ -261,9 +259,9 @@
             
         </li>
     
-        <li class="chapter " data-level="4.3" data-path="controlplane.html">
+        <li class="chapter " data-level="4.3" data-path="../architecture/controlplane.html">
             
-                <a href="controlplane.html">
+                <a href="../architecture/controlplane.html">
             
                     
                         <b>4.3.</b>
@@ -482,9 +480,9 @@
         
         
     
-        <li class="chapter " data-level="9.1" data-path="../extensibility/extending-envoy-proxy-with-webassembly.html">
+        <li class="chapter active" data-level="9.1" data-path="extending-envoy-proxy-with-webassembly.html">
             
-                <a href="../extensibility/extending-envoy-proxy-with-webassembly.html">
+                <a href="extending-envoy-proxy-with-webassembly.html">
             
                     
                         <b>9.1.</b>
@@ -570,7 +568,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Istio 整体架构</a>
+        <a href=".." >基于 WASM 扩展 Envoy</a>
     </h1>
 </div>
 
@@ -585,9 +583,9 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="istio-&#x6574;&#x4F53;&#x67B6;&#x6784;">Istio &#x6574;&#x4F53;&#x67B6;&#x6784;</h1>
+                                <h1 id="&#x57FA;&#x4E8E;-wasm-&#x6269;&#x5C55;-envoy">&#x57FA;&#x4E8E; WASM &#x6269;&#x5C55; Envoy</h1>
 <footer class="page-footer"><span class="copyright">Copyright &#xA9; <a href="https://xcbeyond.cn" target="_blank">xcbeyond.cn</a> 2021 all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification"> Updated at 
-2021-09-05 12:47:59
+2021-09-20 08:56:56
 </span></footer>
                                 
                                 </section>
@@ -615,14 +613,10 @@
 
             
                 
-                <a href="../servicemesh/framework-contrast.html" class="navigation navigation-prev " aria-label="Previous page: Service Mesh 框架对比">
+                <a href="../traffic/config/sidecar.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Sidecar">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="dataplane.html" class="navigation navigation-next " aria-label="Next page: 数据平面">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -631,7 +625,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Istio 整体架构","level":"4.1","depth":1,"next":{"title":"数据平面","level":"4.2","depth":1,"path":"architecture/dataplane.md","ref":"architecture/dataplane.md","articles":[]},"previous":{"title":"Service Mesh 框架对比","level":"3.2","depth":1,"path":"servicemesh/framework-contrast.md","ref":"servicemesh/framework-contrast.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","codesnippet","splitter","page-toc-button","image-captions","lightbox","editlink","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","theme-default","favicon@^0.0.2","tbfed-pagefooter@^0.0.1","-highlight","prism","prism-themes","copy-code-button","donate"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright © <a href=https://xcbeyond.cn>xcbeyond.cn</a> 2021","modify_label":" Updated at ","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{},"github":{"url":"https://github.com/xcbeyond/istio-handbook"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/xcbeyond/istio-handbook/blob/main/"},"splitter":{},"donate":{"alipay":"https://xcbeyond.cn/images/qrcode/alipay.png","alipayText":"支付宝打赏","button":"赏","title":"","wechat":"https://xcbeyond.cn/images/qrcode/wechatpay.jpg","wechatText":"微信打赏"},"codesnippet":{},"fontsettings":{"theme":"white","family":"sans","size":2},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"lightbox":{"jquery":true,"sameUuid":false},"page-toc-button":{},"back-to-top-button":{},"prism-themes":{},"github-buttons":{"repo":"xcbeyond/istio-handbook","types":["star"],"size":"small"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","variable_name":"_pictures"}},"theme":"default","author":"xcbeyond","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"_pictures":[{"backlink":"microservice/new-generation-microservices-architecture.html#fig2.1.1","level":"2.1","list_caption":"Figure: 现实中和PPT中的微服务对比","alt":"现实中和PPT中的微服务对比","nro":1,"url":"现实中vsPPT中的微服务.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"现实中和PPT中的微服务对比","attributes":{},"skip":false,"key":"2.1.1"},{"backlink":"microservice/new-generation-microservices-architecture.html#fig2.1.2","level":"2.1","list_caption":"Figure: 耦合阶段","alt":"耦合阶段","nro":2,"url":"将网络功能和业务逻辑耦合在一起.png","index":2,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"耦合阶段","attributes":{},"skip":false,"key":"2.1.2"},{"backlink":"microservice/new-generation-microservices-architecture.html#fig2.1.3","level":"2.1","list_caption":"Figure: 公共库SDK阶段","alt":"公共库SDK阶段","nro":3,"url":"网络功能被封装在公共库里.png","index":3,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"公共库SDK阶段","attributes":{},"skip":false,"key":"2.1.3"},{"backlink":"microservice/new-generation-microservices-architecture.html#fig2.1.4","level":"2.1","list_caption":"Figure: Sidecar模式阶段","alt":"Sidecar模式阶段","nro":4,"url":"Sidecar模式.png","index":4,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Sidecar模式阶段","attributes":{},"skip":false,"key":"2.1.4"},{"backlink":"microservice/new-generation-microservices-architecture.html#fig2.1.5","level":"2.1","list_caption":"Figure: Service Mesh阶段","alt":"Service Mesh阶段","nro":5,"url":"服务网格网状结构.png","index":5,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Service Mesh阶段","attributes":{},"skip":false,"key":"2.1.5"},{"backlink":"traffic/config/virtual-service.html#fig6.1.1.1","level":"6.1.1","list_caption":"Figure: VirtualService流程图","alt":"VirtualService流程图","nro":6,"url":"virtual-service.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"VirtualService流程图","attributes":{},"skip":false,"key":"6.1.1.1"},{"backlink":"traffic/config/gateway.html#fig6.1.3.1","level":"6.1.3","list_caption":"Figure: Gateway流程图","alt":"Gateway流程图","nro":7,"url":"gateway.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Gateway流程图","attributes":{},"skip":false,"key":"6.1.3.1"},{"backlink":"traffic/config/service-entry.html#fig6.1.4.1","level":"6.1.4","list_caption":"Figure: ServiceEntry流程图","alt":"ServiceEntry流程图","nro":8,"url":"service-entry.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"ServiceEntry流程图","attributes":{},"skip":false,"key":"6.1.4.1"}]},"title":"Istio Handbook - Istio 开发指南","language":"zh-hans","links":{"sidebar":{"xcbeyond个人博客":"https://xcbeyond.cn/"}},"gitbook":"*","description":"Istio Handbook - Istio 开发指南"},"file":{"path":"architecture/istio-architecture.md","mtime":"2021-09-05T04:47:59.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-09-20T00:57:36.745Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"基于 WASM 扩展 Envoy","level":"9.1","depth":1,"next":{"title":"集成注册中心","level":"10.1","depth":1,"ref":"","articles":[{"title":"集成 Consul","level":"10.1.1","depth":2,"path":"integration/consul/integration-consul.md","ref":"integration/consul/integration-consul.md","articles":[]}]},"previous":{"title":"Sidecar","level":"6.1.6","depth":2,"path":"traffic/config/sidecar.md","ref":"traffic/config/sidecar.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","codesnippet","splitter","page-toc-button","image-captions","lightbox","editlink","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","theme-default","favicon@^0.0.2","tbfed-pagefooter@^0.0.1","-highlight","prism","prism-themes","copy-code-button","donate"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright © <a href=https://xcbeyond.cn>xcbeyond.cn</a> 2021","modify_label":" Updated at ","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{},"github":{"url":"https://github.com/xcbeyond/istio-handbook"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/xcbeyond/istio-handbook/blob/main/"},"splitter":{},"donate":{"alipay":"https://xcbeyond.cn/images/qrcode/alipay.png","alipayText":"支付宝打赏","button":"赏","title":"","wechat":"https://xcbeyond.cn/images/qrcode/wechatpay.jpg","wechatText":"微信打赏"},"codesnippet":{},"fontsettings":{"theme":"white","family":"sans","size":2},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"lightbox":{"jquery":true,"sameUuid":false},"page-toc-button":{},"back-to-top-button":{},"prism-themes":{},"github-buttons":{"repo":"xcbeyond/istio-handbook","types":["star"],"size":"small"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","variable_name":"_pictures"}},"theme":"default","author":"xcbeyond","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"_pictures":[{"backlink":"microservice/new-generation-microservices-architecture.html#fig2.1.1","level":"2.1","list_caption":"Figure: 现实中和PPT中的微服务对比","alt":"现实中和PPT中的微服务对比","nro":1,"url":"现实中vsPPT中的微服务.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"现实中和PPT中的微服务对比","attributes":{},"skip":false,"key":"2.1.1"},{"backlink":"microservice/new-generation-microservices-architecture.html#fig2.1.2","level":"2.1","list_caption":"Figure: 耦合阶段","alt":"耦合阶段","nro":2,"url":"将网络功能和业务逻辑耦合在一起.png","index":2,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"耦合阶段","attributes":{},"skip":false,"key":"2.1.2"},{"backlink":"microservice/new-generation-microservices-architecture.html#fig2.1.3","level":"2.1","list_caption":"Figure: 公共库SDK阶段","alt":"公共库SDK阶段","nro":3,"url":"网络功能被封装在公共库里.png","index":3,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"公共库SDK阶段","attributes":{},"skip":false,"key":"2.1.3"},{"backlink":"microservice/new-generation-microservices-architecture.html#fig2.1.4","level":"2.1","list_caption":"Figure: Sidecar模式阶段","alt":"Sidecar模式阶段","nro":4,"url":"Sidecar模式.png","index":4,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Sidecar模式阶段","attributes":{},"skip":false,"key":"2.1.4"},{"backlink":"microservice/new-generation-microservices-architecture.html#fig2.1.5","level":"2.1","list_caption":"Figure: Service Mesh阶段","alt":"Service Mesh阶段","nro":5,"url":"服务网格网状结构.png","index":5,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Service Mesh阶段","attributes":{},"skip":false,"key":"2.1.5"},{"backlink":"traffic/config/virtual-service.html#fig6.1.1.1","level":"6.1.1","list_caption":"Figure: VirtualService流程图","alt":"VirtualService流程图","nro":6,"url":"virtual-service.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"VirtualService流程图","attributes":{},"skip":false,"key":"6.1.1.1"},{"backlink":"traffic/config/gateway.html#fig6.1.3.1","level":"6.1.3","list_caption":"Figure: Gateway流程图","alt":"Gateway流程图","nro":7,"url":"gateway.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Gateway流程图","attributes":{},"skip":false,"key":"6.1.3.1"},{"backlink":"traffic/config/service-entry.html#fig6.1.4.1","level":"6.1.4","list_caption":"Figure: ServiceEntry流程图","alt":"ServiceEntry流程图","nro":8,"url":"service-entry.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"ServiceEntry流程图","attributes":{},"skip":false,"key":"6.1.4.1"}]},"title":"Istio Handbook - Istio 开发指南","language":"zh-hans","links":{"sidebar":{"xcbeyond个人博客":"https://xcbeyond.cn/"}},"gitbook":"*","description":"Istio Handbook - Istio 开发指南"},"file":{"path":"extensibility/extending-envoy-proxy-with-webassembly.md","mtime":"2021-09-20T00:56:56.248Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-09-20T00:57:36.745Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
