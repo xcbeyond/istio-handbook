@@ -46,5 +46,5 @@
 
 ## 集成
 
-- 集成注册中心
-  - [集成 Consul](integration/consul/integration-consul.md)
+- [集成注册中心](integration/registry/integration-registry.md)
+  - [集成 Consul](integration/registry/integration-consul.md)
