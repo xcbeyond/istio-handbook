@@ -23,7 +23,8 @@
         "tbfed-pagefooter@^0.0.1",
         "-highlight", "prism", "prism-themes",
         "copy-code-button",
-        "donate"
+        "donate",
+        "mygitalk"
     ],
     "pluginsConfig": {
         "theme-default": {
@@ -60,6 +61,14 @@
             "button": "赏",
             "alipayText": "支付宝打赏",
             "wechatText": "微信打赏"
-        }
+        },
+        "mygitalk": {
+            "clientID": "c10f597904f9726fdd0e",
+            "clientSecret": "7e2bcbbd69c3b6369893995ff81aec88e4b53800",
+            "repo": "istio-handbook",
+            "owner": "xcbeyond",
+            "admin": ["xcbeyond"],
+            "distractionFreeMode": false
+          }
     }
 }
