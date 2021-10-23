@@ -29,15 +29,20 @@
 
 ## 流量管理
 
-- [资源配置](traffic/config/index.md)
-  - [VirtualService](traffic/config/virtual-service.md)
-  - [DestinationRule](traffic/config/destination-rule.md)
-  - [Gateway](traffic/config/gateway.md)
-  - [ServiceEntry](traffic/config/service-entry.md)
-  - [EnvoyFilter](traffic/config/envoy-filter.md)
-  - [Sidecar](traffic/config/sidecar.md)
+- [资源配置](traffic/crd/traffic-crd.md)
+  - [VirtualService](traffic/crd/virtual-service.md)
+  - [DestinationRule](traffic/crd/destination-rule.md)
+  - [Gateway](traffic/crd/gateway.md)
+  - [ServiceEntry](traffic/crd/service-entry.md)
+  - [EnvoyFilter](traffic/crd/envoy-filter.md)
+  - [Sidecar](traffic/crd/sidecar.md)
 
 ## 安全
+
+- [资源配置](security/crd/security-crd.md)
+  - [RequestAuthentication](security/crd/request-authentication.md)
+  - [PeerAuthentication](security/crd/peer-authentication.md)
+  - [AuthorizationPolicy](security/crd/authorization-policy.md)
 
 ## 可观测性
 
