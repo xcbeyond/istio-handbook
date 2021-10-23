@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>集成 Consul · Istio Handbook - Istio 开发指南</title>
+        <title>ServiceEntry · Istio Handbook - Istio 开发指南</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -87,8 +87,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="envoy-filter.html" />
     
-    <link rel="prev" href="integration-registry.html" />
+    
+    <link rel="prev" href="gateway.html" />
     
 
     
@@ -363,9 +365,9 @@
         
         
     
-        <li class="chapter " data-level="6.1" data-path="../../traffic/crd/traffic-crd.html">
+        <li class="chapter " data-level="6.1" data-path="traffic-crd.html">
             
-                <a href="../../traffic/crd/traffic-crd.html">
+                <a href="traffic-crd.html">
             
                     
                         <b>6.1.</b>
@@ -379,9 +381,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="6.1.1" data-path="../../traffic/crd/virtual-service.html">
+        <li class="chapter " data-level="6.1.1" data-path="virtual-service.html">
             
-                <a href="../../traffic/crd/virtual-service.html">
+                <a href="virtual-service.html">
             
                     
                         <b>6.1.1.</b>
@@ -394,9 +396,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.1.2" data-path="../../traffic/crd/destination-rule.html">
+        <li class="chapter " data-level="6.1.2" data-path="destination-rule.html">
             
-                <a href="../../traffic/crd/destination-rule.html">
+                <a href="destination-rule.html">
             
                     
                         <b>6.1.2.</b>
@@ -409,9 +411,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.1.3" data-path="../../traffic/crd/gateway.html">
+        <li class="chapter " data-level="6.1.3" data-path="gateway.html">
             
-                <a href="../../traffic/crd/gateway.html">
+                <a href="gateway.html">
             
                     
                         <b>6.1.3.</b>
@@ -424,9 +426,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.1.4" data-path="../../traffic/crd/service-entry.html">
+        <li class="chapter active" data-level="6.1.4" data-path="service-entry.html">
             
-                <a href="../../traffic/crd/service-entry.html">
+                <a href="service-entry.html">
             
                     
                         <b>6.1.4.</b>
@@ -439,9 +441,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.1.5" data-path="../../traffic/crd/envoy-filter.html">
+        <li class="chapter " data-level="6.1.5" data-path="envoy-filter.html">
             
-                <a href="../../traffic/crd/envoy-filter.html">
+                <a href="envoy-filter.html">
             
                     
                         <b>6.1.5.</b>
@@ -454,9 +456,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.1.6" data-path="../../traffic/crd/sidecar.html">
+        <li class="chapter " data-level="6.1.6" data-path="sidecar.html">
             
-                <a href="../../traffic/crd/sidecar.html">
+                <a href="sidecar.html">
             
                     
                         <b>6.1.6.</b>
@@ -583,9 +585,9 @@
         
         
     
-        <li class="chapter " data-level="10.1" data-path="integration-registry.html">
+        <li class="chapter " data-level="10.1" data-path="../../integration/registry/integration-registry.html">
             
-                <a href="integration-registry.html">
+                <a href="../../integration/registry/integration-registry.html">
             
                     
                         <b>10.1.</b>
@@ -599,9 +601,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="10.1.1" data-path="integration-consul.html">
+        <li class="chapter " data-level="10.1.1" data-path="../../integration/registry/integration-consul.html">
             
-                <a href="integration-consul.html">
+                <a href="../../integration/registry/integration-consul.html">
             
                     
                         <b>10.1.1.</b>
@@ -649,7 +651,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >集成 Consul</a>
+        <a href="../.." >ServiceEntry</a>
     </h1>
 </div>
 
@@ -664,9 +666,30 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x96C6;&#x6210;-consul">&#x96C6;&#x6210; Consul</h1>
+                                <h1 id="serviceentry">ServiceEntry</h1>
+<p><code>ServiceEntry</code> &#xFF0C;&#x5C06;&#x7F51;&#x683C;&#x5916;&#x7684;&#x670D;&#x52A1;&#x6CE8;&#x518C;&#x5230; <code>Istio</code> &#x7684;&#x6CE8;&#x518C;&#x8868;&#x4E2D;&#xFF0C;&#x8FD9;&#x6837;&#x5C31;&#x53EF;&#x4EE5;&#x628A;&#x5916;&#x90E8;&#x670D;&#x52A1;&#x5F53;&#x505A;&#x7F51;&#x683C;&#x5185;&#x90E8;&#x7684;&#x670D;&#x52A1;&#x4E00;&#x6837;&#x8FDB;&#x884C;&#x7BA1;&#x7406;&#x548C;&#x64CD;&#x4F5C;&#x3002;&#x5305;&#x62EC;&#x670D;&#x52A1;&#x53D1;&#x73B0;&#x3001;&#x8DEF;&#x7531;&#x63A7;&#x5236;&#x7B49;&#xFF0C;&#x5728; <code>ServiceEntry</code> &#x4E2D;&#x53EF;&#x4EE5;&#x914D;&#x7F6E; <code>hosts</code>&#xFF0C;<code>vips</code>&#xFF0C;<code>ports</code>&#xFF0C;<code>protocols</code>&#xFF0C;<code>endpoints</code>&#x7B49;&#x3002;</p>
+<figure id="fig6.1.4.1"><a href="service-entry.png" data-lightbox="48781e34-4240-4e3a-b14e-84a701c26887" data-title="ServiceEntry&#x6D41;&#x7A0B;&#x56FE;"><img src="service-entry.png" alt="ServiceEntry&#x6D41;&#x7A0B;&#x56FE;"></a><figcaption>&#x56FE; 6.1.4.1&#xFF1A;ServiceEntry&#x6D41;&#x7A0B;&#x56FE;</figcaption></figure>
+<h2 id="&#x793A;&#x4F8B;">&#x793A;&#x4F8B;</h2>
+<p>&#x5B83;&#x7684;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x793A;&#x4F8B;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre class="language-"><code class="lang-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> networking.istio.io/v1alpha3
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> ServiceEntry
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> external<span class="token punctuation">-</span>svc<span class="token punctuation">-</span>https
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">hosts</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> api.dropboxapi.com
+    <span class="token punctuation">-</span> www.googleapis.com
+    <span class="token punctuation">-</span> api.facebook.com
+  <span class="token key atrule">location</span><span class="token punctuation">:</span> MESH_EXTERNAL
+  <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> <span class="token key atrule">number</span><span class="token punctuation">:</span> <span class="token number">443</span>
+      <span class="token key atrule">name</span><span class="token punctuation">:</span> https
+      <span class="token key atrule">protocol</span><span class="token punctuation">:</span> TLS
+  <span class="token key atrule">resolution</span><span class="token punctuation">:</span> DNS
+</code></pre>
+<p>&#x8BE5;&#x793A;&#x4F8B;&#x4E2D;&#xFF0C;&#x5B9A;&#x4E49;&#x4E86;&#x5728;&#x7F51;&#x683C;&#x5185;&#x90E8;&#x4F7F;&#x7528; <code>HTTPS</code> &#x534F;&#x8BAE;&#x8BBF;&#x95EE;&#x5916;&#x90E8;&#x7684;&#x51E0;&#x4E2A;&#x670D;&#x52A1;&#x7684;&#x914D;&#x7F6E;&#x3002;&#x901A;&#x8FC7;&#x4E0A;&#x9762;&#x914D;&#x7F6E;&#xFF0C;&#x7F51;&#x683C;&#x5185;&#x90E8;&#x7684;&#x670D;&#x52A1;&#x5C31;&#x53EF;&#x4EE5;&#x628A; <code>api.dropboxapi.com</code>&#xFF0C;<code>www.googleapis.com</code>, <code>www.googleapis.com</code> &#x8FD9;&#x51E0;&#x4E2A;&#x5916;&#x90E8;&#x7684;&#x670D;&#x52A1;&#x5F53;&#x505A;&#x7F51;&#x683C;&#x5185;&#x90E8;&#x670D;&#x52A1;&#x53BB;&#x8BBF;&#x95EE;&#x3002;<code>MESH_EXTERNAL</code> &#x8868;&#x793A;&#x662F;&#x7F51;&#x683C;&#x5916;&#x670D;&#x52A1;&#xFF0C;&#x8BE5;&#x53C2;&#x6570;&#x4F1A;&#x5F71;&#x54CD;&#x5230;&#x670D;&#x52A1;&#x95F4;&#x8C03;&#x7528;&#x7684; <code>mTLS</code> &#x8BA4;&#x8BC1;&#x3001;&#x7B56;&#x7565;&#x6267;&#x884C;&#x7B49;&#x3002;</p>
 <footer class="page-footer"><span class="copyright">Copyright &#xA9; <a href="https://xcbeyond.cn" target="_blank">xcbeyond.cn</a> 2021 all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification"> Updated at 
-2021-09-30 16:50:38
+2021-10-23 21:28:30
 </span></footer>
                                 
                                 </section>
@@ -694,10 +717,14 @@
 
             
                 
-                <a href="integration-registry.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 集成注册中心">
+                <a href="gateway.html" class="navigation navigation-prev " aria-label="Previous page: Gateway">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="envoy-filter.html" class="navigation navigation-next " aria-label="Next page: EnvoyFilter">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -706,7 +733,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"集成 Consul","level":"10.1.1","depth":2,"previous":{"title":"集成注册中心","level":"10.1","depth":1,"path":"integration/registry/integration-registry.md","ref":"integration/registry/integration-registry.md","articles":[{"title":"集成 Consul","level":"10.1.1","depth":2,"path":"integration/registry/integration-consul.md","ref":"integration/registry/integration-consul.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["github","codesnippet","splitter","page-toc-button","image-captions","lightbox","editlink","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","theme-default","favicon@^0.0.2","tbfed-pagefooter@^0.0.1","-highlight","prism","prism-themes","copy-code-button","donate"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright © <a href=https://xcbeyond.cn>xcbeyond.cn</a> 2021","modify_label":" Updated at ","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{},"github":{"url":"https://github.com/xcbeyond/istio-handbook"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/xcbeyond/istio-handbook/blob/main/"},"splitter":{},"donate":{"alipay":"https://xcbeyond.cn/images/qrcode/alipay.png","alipayText":"支付宝打赏","button":"赏","title":"","wechat":"https://xcbeyond.cn/images/qrcode/wechatpay.jpg","wechatText":"微信打赏"},"codesnippet":{},"fontsettings":{"theme":"white","family":"sans","size":2},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"lightbox":{"jquery":true,"sameUuid":false},"page-toc-button":{},"back-to-top-button":{},"prism-themes":{},"github-buttons":{"repo":"xcbeyond/istio-handbook","types":["star"],"size":"small"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","variable_name":"_pictures"}},"theme":"default","author":"xcbeyond","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"_pictures":[{"backlink":"microservice/new-generation-microservices-architecture.html#fig2.1.1","level":"2.1","list_caption":"Figure: 现实中和PPT中的微服务对比","alt":"现实中和PPT中的微服务对比","nro":1,"url":"现实中vsPPT中的微服务.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"现实中和PPT中的微服务对比","attributes":{},"skip":false,"key":"2.1.1"},{"backlink":"microservice/new-generation-microservices-architecture.html#fig2.1.2","level":"2.1","list_caption":"Figure: 耦合阶段","alt":"耦合阶段","nro":2,"url":"将网络功能和业务逻辑耦合在一起.png","index":2,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"耦合阶段","attributes":{},"skip":false,"key":"2.1.2"},{"backlink":"microservice/new-generation-microservices-architecture.html#fig2.1.3","level":"2.1","list_caption":"Figure: 公共库SDK阶段","alt":"公共库SDK阶段","nro":3,"url":"网络功能被封装在公共库里.png","index":3,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"公共库SDK阶段","attributes":{},"skip":false,"key":"2.1.3"},{"backlink":"microservice/new-generation-microservices-architecture.html#fig2.1.4","level":"2.1","list_caption":"Figure: Sidecar模式阶段","alt":"Sidecar模式阶段","nro":4,"url":"Sidecar模式.png","index":4,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Sidecar模式阶段","attributes":{},"skip":false,"key":"2.1.4"},{"backlink":"microservice/new-generation-microservices-architecture.html#fig2.1.5","level":"2.1","list_caption":"Figure: Service Mesh阶段","alt":"Service Mesh阶段","nro":5,"url":"服务网格网状结构.png","index":5,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Service Mesh阶段","attributes":{},"skip":false,"key":"2.1.5"},{"backlink":"servicemesh/introduction.html#fig3.1.1","level":"3.1","list_caption":"Figure: Service Mesh部署网络结构图","alt":"Service Mesh部署网络结构图","nro":6,"url":"service-mesh-network-struct.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Service Mesh部署网络结构图","attributes":{},"skip":false,"key":"3.1.1"},{"backlink":"servicemesh/introduction.html#fig3.1.2","level":"3.1","list_caption":"Figure: Service Mesh架构图","alt":"Service Mesh架构图","nro":7,"url":"service-mesh-architecture.png","index":2,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Service Mesh架构图","attributes":{},"skip":false,"key":"3.1.2"},{"backlink":"servicemesh/framework-contrast.html#fig3.2.1","level":"3.2","list_caption":"Figure: Linkerd架构图","alt":"Linkerd架构图","nro":8,"url":"linkerd-architecture.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Linkerd架构图","attributes":{},"skip":false,"key":"3.2.1"},{"backlink":"servicemesh/framework-contrast.html#fig3.2.2","level":"3.2","list_caption":"Figure: Istio架构图","alt":"Istio架构图","nro":9,"url":"istio-architecture.png","index":2,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Istio架构图","attributes":{},"skip":false,"key":"3.2.2"},{"backlink":"architecture/istio-architecture.html#fig4.1.1","level":"4.1","list_caption":"Figure: Istio架构图","alt":"Istio架构图","nro":10,"url":"istio-architecture.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Istio架构图","attributes":{},"skip":false,"key":"4.1.1"},{"backlink":"architecture/istio-architecture.html#fig4.1.2","level":"4.1","list_caption":"Figure: Istio架构演进","alt":"Istio架构演进","nro":11,"url":"istio-architecture-evolution.png","index":2,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Istio架构演进","attributes":{},"skip":false,"key":"4.1.2"},{"backlink":"architecture/dataplane.html#fig4.2.1","level":"4.2","list_caption":"Figure: Istio数据平面架构图","alt":"Istio数据平面架构图","nro":12,"url":"istio-dataplane-architecture.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Istio数据平面架构图","attributes":{},"skip":false,"key":"4.2.1"},{"backlink":"architecture/controlplane.html#fig4.3.1","level":"4.3","list_caption":"Figure: Pilot架构图","alt":"Pilot架构图","nro":13,"url":"pilot-arch.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Pilot架构图","attributes":{},"skip":false,"key":"4.3.1"},{"backlink":"architecture/controlplane.html#fig4.3.2","level":"4.3","list_caption":"Figure: Pilot实现","alt":"Pilot实现","nro":14,"url":"pilot-process.png","index":2,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Pilot实现","attributes":{},"skip":false,"key":"4.3.2"},{"backlink":"architecture/controlplane.html#fig4.3.3","level":"4.3","list_caption":"Figure: Citadel身份认证流程","alt":"Citadel身份认证流程","nro":15,"url":"citadel-identity-authentication-process.png","index":3,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Citadel身份认证流程","attributes":{},"skip":false,"key":"4.3.3"},{"backlink":"install/deploy-bookinfo-application.html#fig5.3.1","level":"5.3","list_caption":"Figure: Bookinfo部署图","alt":"Bookinfo部署图","nro":16,"url":"bookinfo.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Bookinfo部署图","attributes":{},"skip":false,"key":"5.3.1"},{"backlink":"install/deploy-bookinfo-application.html#fig5.3.2","level":"5.3","list_caption":"Figure: EXTERNAL-IP设置","alt":"EXTERNAL-IP设置","nro":17,"url":"EXTERNAL-IP-setting.png","index":2,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"EXTERNAL-IP设置","attributes":{},"skip":false,"key":"5.3.2"},{"backlink":"install/deploy-bookinfo-application.html#fig5.3.3","level":"5.3","list_caption":"Figure: BookInfo应用页面","alt":"BookInfo应用页面","nro":18,"url":"bookinfo-pages.png","index":3,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"BookInfo应用页面","attributes":{},"skip":false,"key":"5.3.3"},{"backlink":"install/deploy-kiali.html#fig5.4.1","level":"5.4","list_caption":"Figure: Kiali Graph","alt":"Kiali Graph","nro":19,"url":"kiali-graph.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Kiali Graph","attributes":{},"skip":false,"key":"5.4.1"},{"backlink":"traffic/crd/virtual-service.html#fig6.1.1.1","level":"6.1.1","list_caption":"Figure: VirtualService流程图","alt":"VirtualService流程图","nro":20,"url":"virtual-service.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"VirtualService流程图","attributes":{},"skip":false,"key":"6.1.1.1"},{"backlink":"traffic/crd/gateway.html#fig6.1.3.1","level":"6.1.3","list_caption":"Figure: Gateway流程图","alt":"Gateway流程图","nro":21,"url":"gateway.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Gateway流程图","attributes":{},"skip":false,"key":"6.1.3.1"},{"backlink":"traffic/crd/service-entry.html#fig6.1.4.1","level":"6.1.4","list_caption":"Figure: ServiceEntry流程图","alt":"ServiceEntry流程图","nro":22,"url":"service-entry.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"ServiceEntry流程图","attributes":{},"skip":false,"key":"6.1.4.1"}]},"title":"Istio Handbook - Istio 开发指南","language":"zh-hans","links":{"sidebar":{"xcbeyond个人博客":"https://xcbeyond.cn/"}},"gitbook":"*","description":"Istio Handbook - Istio 开发指南"},"file":{"path":"integration/registry/integration-consul.md","mtime":"2021-09-30T08:50:38.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-10-23T13:31:01.621Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"ServiceEntry","level":"6.1.4","depth":2,"next":{"title":"EnvoyFilter","level":"6.1.5","depth":2,"path":"traffic/crd/envoy-filter.md","ref":"traffic/crd/envoy-filter.md","articles":[]},"previous":{"title":"Gateway","level":"6.1.3","depth":2,"path":"traffic/crd/gateway.md","ref":"traffic/crd/gateway.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","codesnippet","splitter","page-toc-button","image-captions","lightbox","editlink","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","theme-default","favicon@^0.0.2","tbfed-pagefooter@^0.0.1","-highlight","prism","prism-themes","copy-code-button","donate"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright © <a href=https://xcbeyond.cn>xcbeyond.cn</a> 2021","modify_label":" Updated at ","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{},"github":{"url":"https://github.com/xcbeyond/istio-handbook"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/xcbeyond/istio-handbook/blob/main/"},"splitter":{},"donate":{"alipay":"https://xcbeyond.cn/images/qrcode/alipay.png","alipayText":"支付宝打赏","button":"赏","title":"","wechat":"https://xcbeyond.cn/images/qrcode/wechatpay.jpg","wechatText":"微信打赏"},"codesnippet":{},"fontsettings":{"theme":"white","family":"sans","size":2},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"lightbox":{"jquery":true,"sameUuid":false},"page-toc-button":{},"back-to-top-button":{},"prism-themes":{},"github-buttons":{"repo":"xcbeyond/istio-handbook","types":["star"],"size":"small"},"copy-code-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","variable_name":"_pictures"}},"theme":"default","author":"xcbeyond","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"_pictures":[{"backlink":"microservice/new-generation-microservices-architecture.html#fig2.1.1","level":"2.1","list_caption":"Figure: 现实中和PPT中的微服务对比","alt":"现实中和PPT中的微服务对比","nro":1,"url":"现实中vsPPT中的微服务.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"现实中和PPT中的微服务对比","attributes":{},"skip":false,"key":"2.1.1"},{"backlink":"microservice/new-generation-microservices-architecture.html#fig2.1.2","level":"2.1","list_caption":"Figure: 耦合阶段","alt":"耦合阶段","nro":2,"url":"将网络功能和业务逻辑耦合在一起.png","index":2,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"耦合阶段","attributes":{},"skip":false,"key":"2.1.2"},{"backlink":"microservice/new-generation-microservices-architecture.html#fig2.1.3","level":"2.1","list_caption":"Figure: 公共库SDK阶段","alt":"公共库SDK阶段","nro":3,"url":"网络功能被封装在公共库里.png","index":3,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"公共库SDK阶段","attributes":{},"skip":false,"key":"2.1.3"},{"backlink":"microservice/new-generation-microservices-architecture.html#fig2.1.4","level":"2.1","list_caption":"Figure: Sidecar模式阶段","alt":"Sidecar模式阶段","nro":4,"url":"Sidecar模式.png","index":4,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Sidecar模式阶段","attributes":{},"skip":false,"key":"2.1.4"},{"backlink":"microservice/new-generation-microservices-architecture.html#fig2.1.5","level":"2.1","list_caption":"Figure: Service Mesh阶段","alt":"Service Mesh阶段","nro":5,"url":"服务网格网状结构.png","index":5,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Service Mesh阶段","attributes":{},"skip":false,"key":"2.1.5"},{"backlink":"servicemesh/introduction.html#fig3.1.1","level":"3.1","list_caption":"Figure: Service Mesh部署网络结构图","alt":"Service Mesh部署网络结构图","nro":6,"url":"service-mesh-network-struct.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Service Mesh部署网络结构图","attributes":{},"skip":false,"key":"3.1.1"},{"backlink":"servicemesh/introduction.html#fig3.1.2","level":"3.1","list_caption":"Figure: Service Mesh架构图","alt":"Service Mesh架构图","nro":7,"url":"service-mesh-architecture.png","index":2,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Service Mesh架构图","attributes":{},"skip":false,"key":"3.1.2"},{"backlink":"servicemesh/framework-contrast.html#fig3.2.1","level":"3.2","list_caption":"Figure: Linkerd架构图","alt":"Linkerd架构图","nro":8,"url":"linkerd-architecture.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Linkerd架构图","attributes":{},"skip":false,"key":"3.2.1"},{"backlink":"servicemesh/framework-contrast.html#fig3.2.2","level":"3.2","list_caption":"Figure: Istio架构图","alt":"Istio架构图","nro":9,"url":"istio-architecture.png","index":2,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Istio架构图","attributes":{},"skip":false,"key":"3.2.2"},{"backlink":"architecture/istio-architecture.html#fig4.1.1","level":"4.1","list_caption":"Figure: Istio架构图","alt":"Istio架构图","nro":10,"url":"istio-architecture.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Istio架构图","attributes":{},"skip":false,"key":"4.1.1"},{"backlink":"architecture/istio-architecture.html#fig4.1.2","level":"4.1","list_caption":"Figure: Istio架构演进","alt":"Istio架构演进","nro":11,"url":"istio-architecture-evolution.png","index":2,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Istio架构演进","attributes":{},"skip":false,"key":"4.1.2"},{"backlink":"architecture/dataplane.html#fig4.2.1","level":"4.2","list_caption":"Figure: Istio数据平面架构图","alt":"Istio数据平面架构图","nro":12,"url":"istio-dataplane-architecture.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Istio数据平面架构图","attributes":{},"skip":false,"key":"4.2.1"},{"backlink":"architecture/controlplane.html#fig4.3.1","level":"4.3","list_caption":"Figure: Pilot架构图","alt":"Pilot架构图","nro":13,"url":"pilot-arch.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Pilot架构图","attributes":{},"skip":false,"key":"4.3.1"},{"backlink":"architecture/controlplane.html#fig4.3.2","level":"4.3","list_caption":"Figure: Pilot实现","alt":"Pilot实现","nro":14,"url":"pilot-process.png","index":2,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Pilot实现","attributes":{},"skip":false,"key":"4.3.2"},{"backlink":"architecture/controlplane.html#fig4.3.3","level":"4.3","list_caption":"Figure: Citadel身份认证流程","alt":"Citadel身份认证流程","nro":15,"url":"citadel-identity-authentication-process.png","index":3,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Citadel身份认证流程","attributes":{},"skip":false,"key":"4.3.3"},{"backlink":"install/deploy-bookinfo-application.html#fig5.3.1","level":"5.3","list_caption":"Figure: Bookinfo部署图","alt":"Bookinfo部署图","nro":16,"url":"bookinfo.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Bookinfo部署图","attributes":{},"skip":false,"key":"5.3.1"},{"backlink":"install/deploy-bookinfo-application.html#fig5.3.2","level":"5.3","list_caption":"Figure: EXTERNAL-IP设置","alt":"EXTERNAL-IP设置","nro":17,"url":"EXTERNAL-IP-setting.png","index":2,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"EXTERNAL-IP设置","attributes":{},"skip":false,"key":"5.3.2"},{"backlink":"install/deploy-bookinfo-application.html#fig5.3.3","level":"5.3","list_caption":"Figure: BookInfo应用页面","alt":"BookInfo应用页面","nro":18,"url":"bookinfo-pages.png","index":3,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"BookInfo应用页面","attributes":{},"skip":false,"key":"5.3.3"},{"backlink":"install/deploy-kiali.html#fig5.4.1","level":"5.4","list_caption":"Figure: Kiali Graph","alt":"Kiali Graph","nro":19,"url":"kiali-graph.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Kiali Graph","attributes":{},"skip":false,"key":"5.4.1"},{"backlink":"traffic/crd/virtual-service.html#fig6.1.1.1","level":"6.1.1","list_caption":"Figure: VirtualService流程图","alt":"VirtualService流程图","nro":20,"url":"virtual-service.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"VirtualService流程图","attributes":{},"skip":false,"key":"6.1.1.1"},{"backlink":"traffic/crd/gateway.html#fig6.1.3.1","level":"6.1.3","list_caption":"Figure: Gateway流程图","alt":"Gateway流程图","nro":21,"url":"gateway.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Gateway流程图","attributes":{},"skip":false,"key":"6.1.3.1"},{"backlink":"traffic/crd/service-entry.html#fig6.1.4.1","level":"6.1.4","list_caption":"Figure: ServiceEntry流程图","alt":"ServiceEntry流程图","nro":22,"url":"service-entry.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"ServiceEntry流程图","attributes":{},"skip":false,"key":"6.1.4.1"}]},"title":"Istio Handbook - Istio 开发指南","language":"zh-hans","links":{"sidebar":{"xcbeyond个人博客":"https://xcbeyond.cn/"}},"gitbook":"*","description":"Istio Handbook - Istio 开发指南"},"file":{"path":"traffic/crd/service-entry.md","mtime":"2021-10-23T13:28:30.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-10-23T13:31:01.621Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
