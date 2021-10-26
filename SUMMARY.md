@@ -29,6 +29,7 @@
 
 ## 流量管理
 
+- [概述](traffic/index.md)
 - [资源配置](traffic/crd/traffic-crd.md)
   - [VirtualService](traffic/crd/virtual-service.md)
   - [DestinationRule](traffic/crd/destination-rule.md)
@@ -36,6 +37,16 @@
   - [ServiceEntry](traffic/crd/service-entry.md)
   - [EnvoyFilter](traffic/crd/envoy-filter.md)
   - [Sidecar](traffic/crd/sidecar.md)
+- [负载均衡](traffic/load-balancing.md)
+- [流量镜像](traffic/traffic-shadow.md)
+- [Ingress](traffic/ingress.md)
+- [Egress](traffic/egress.md)
+- [超时]()
+- [重试]()
+- [熔断](traffic/circuit-breaking.md)
+- [限流]()
+- [故障注入](traffic/fault-injection.md)
+- [灰度发布](traffic/gray-release.md)
 
 ## 安全
 
