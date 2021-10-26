@@ -23,7 +23,7 @@
 
 - [Istio 安装](install/istio-install.md)
 - [Istio 卸载](install/istio-uninstall.md)
-- [部署示例](install/deploy-bookinfo-application.md)
+- [部署示例](install/deploy-bookinfo-sample.md)
 - [部署 Dashboard](install/deploy-kiali.md)
 - [升级](install/istio-upgrade.md)
 
