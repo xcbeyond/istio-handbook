@@ -8,6 +8,9 @@
             "xcbeyond个人博客": "https://xcbeyond.cn/"
         }
     },
+    "styles": {
+        "website": "styles/website.css"
+    },
     "plugins": [
         "github",
         "codesnippet",
