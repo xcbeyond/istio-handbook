@@ -1,3 +1,3 @@
 # istio-handbook
 
-istio 开发指南
+istio 实践手册
