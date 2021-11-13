@@ -1,6 +1,6 @@
 {
     "title": "Istio Handbook - Istio 实践手册",
-    "description": "Istio Handbook - Istio 实践手册",
+    "description": "Istio Handbook - Istio 实践手册，本文记录了本人从零开始接触 Istio 的学习历程，从开发者的视角来看，将日常学习内容进行总结和分享。从服务网格概念出发，将逐步渗透到 Istio 具体细节中来，旨在帮助 Istio 学习者、使用者快速掌握相关知识点，可作为 Istio 学习、实践手册。",
     "language": "zh-hans",
     "author": "xcbeyond",
     "links": {
@@ -22,10 +22,10 @@
         "-lunr", "-search", "search-plus",
         "github-buttons@2.1.0",
         "theme-default",
-        "favicon@^0.0.2",
+        "favicon-absolute",
         "tbfed-pagefooter@^0.0.1",
         "-highlight", "prism", "prism-themes",
-        "copy-code-button",
+        "code", "-copy-code-button",
         "donate"
     ],
     "pluginsConfig": {
@@ -42,6 +42,9 @@
         "image-captions": {
             "caption": "图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_"
         },
+        "code": {
+            "copyButtons": true
+        },
         "github-buttons": {
             "repo": "xcbeyond/istio-handbook",
             "types": ["star"],
@@ -52,9 +55,9 @@
             "modify_label": " Updated at ",
             "modify_format": "YYYY-MM-DD HH:mm:ss"
         },
-        "favicon": {
-            "shortcut": "favicon.ico",
-            "bookmark": "favicon.ico"
+        "favicon-absolute": {
+            "favicon": "favicon.ico",
+            "appleTouchIconPrecomposed152": "favicon.ico"
         },
         "donate": {
             "wechat": "https://xcbeyond.cn/images/qrcode/wechatpay.jpg",
