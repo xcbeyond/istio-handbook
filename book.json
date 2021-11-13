@@ -22,7 +22,7 @@
         "-lunr", "-search", "search-plus",
         "github-buttons@2.1.0",
         "theme-default",
-        "favicon-absolute",
+        "favicon@^0.0.2",
         "tbfed-pagefooter@^0.0.1",
         "-highlight", "prism", "prism-themes",
         "code", "-copy-code-button",
@@ -55,9 +55,9 @@
             "modify_label": " Updated at ",
             "modify_format": "YYYY-MM-DD HH:mm:ss"
         },
-        "favicon-absolute": {
-            "favicon": "favicon.ico",
-            "appleTouchIconPrecomposed152": "favicon.ico"
+        "favicon": {
+            "shortcut": "favicon.ico",
+            "bookmark": "favicon.ico"
         },
         "donate": {
             "wechat": "https://xcbeyond.cn/images/qrcode/wechatpay.jpg",
