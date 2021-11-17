@@ -5,7 +5,7 @@ on:
       - main  # trigger branch
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
     - name: Git Checkout
       uses: actions/checkout@v2
@@ -15,4 +15,4 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with: 
         personal_token: ${{ secrets.PERSONAL_TOKEN }}
-        public_dir: ./_book
+        publish_dir: ./_book
