@@ -1,0 +1,26 @@
+{
+  "title": "SPA 富应用开发",
+  "description" : "SPA 富应用开发课程资料",
+  "author": "王顶",
+  "language": "zh-hans",
+  "plugins": [
+    "-lunr",
+    "-search",
+    "-highlight",
+    "-sharing",
+    "bsz",
+    "gtalk"
+  ],
+  "pluginsConfig": {
+    "bsz": {
+      "copyright": "2018&nbsp;-&nbsp;<span class=\"bsz-this-year\"></span>&nbsp;by&nbsp;<a href=\"https://i.wangding.in\">王顶</a>.&nbsp;All rights reserved."
+    },
+    "gtalk": {
+      "clientID": "38298dfccbd34894f5af",
+      "clientSecret": "021ecfcb4802128f421d11acd9e852f2164df232",
+      "repo": "sample",
+      "owner": "wangding",
+      "admin": ["wangding"]
+    }
+  }
+}
