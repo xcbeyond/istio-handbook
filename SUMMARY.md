@@ -8,10 +8,10 @@
 
 - [迎接新一代微服务架构](microservice/new-generation-microservices-architecture.md)
 
-## Service Mesh 概述
+## 服务网格概述
 
-- [Service Mesh 介绍](servicemesh/introduction.md)
-- [Service Mesh 框架对比](servicemesh/framework-contrast.md)
+- [服务网格介绍](servicemesh/introduction.md)
+- [服务网格框架对比](servicemesh/framework-contrast.md)
 
 ## Istio 架构剖析
 
@@ -65,3 +65,5 @@
 
 - [集成注册中心](integration/registry/integration-registry.md)
   - [集成 Consul](integration/registry/integration-consul.md)
+
+## FAQ
