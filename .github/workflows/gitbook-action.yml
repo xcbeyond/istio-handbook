@@ -1,0 +1,19 @@
+name: 'Gitbook Deploy Action'
+on:
+  push:
+    branches:
+      - main  # trigger branch
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git Checkout
+      uses: actions/checkout@v2
+    - name: Gitbook Action
+      uses: xcbeyond/gitbook-action@main
+      with:
+        token: ${{ secrets.PERSONAL_TOKEN }}  # remember add this in settings/secrets as following
+        source_branch: main
+        time_zone: Asia/Shanghai            # set time zone
+        source_edit_time: true              # source time
+        publish_commit_message: ${{ github.event.head_commit.message }}  # use last commit message
