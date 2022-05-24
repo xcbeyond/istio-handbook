@@ -1,4 +1,4 @@
-# 部署示例
+# 部署 Bookinfo 示例
 
 部署官方 [Bookinfo 示例应用](https://istio.io/latest/docs/examples/bookinfo/)。
 
@@ -54,7 +54,7 @@
 
 ## 2、确定 Ingress 的 IP 和端口
 
-现在 `Bookinfo` 中的所有服务都启动并运行中，您需要使应用程序可以从外部访问，例如使用浏览器。可以用 [Istio Gateway](https://istio.io/latest/zh/docs/concepts/traffic-management/#gateways) 来实现这个目标。
+现在 `Bookinfo` 中的所有服务都启动并运行中，您需要使应用程序可以从外部访问，例如使用浏览器。可以通过 [Istio Gateway](https://istio.io/latest/zh/docs/concepts/traffic-management/#gateways) 和 istio-ingress 来实现。
 
 1. 为应用程序定义 `Ingress` 网关
 
@@ -75,26 +75,12 @@
    执行如下命令，明确自身 Kubernetes 集群环境支持外部负载均衡：
 
    ```sh
-   kubectl get svc istio-ingressgateway -n istio-system
+   $ kubectl get svc istio-ingressgateway -n istio-system
+   NAME                   TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                                                                      AGE
+   istio-ingressgateway   LoadBalancer   10.108.112.232   localhost     15021:32133/TCP,80:31412/TCP,443:31507/TCP,31400:32717/TCP,15443:32369/TCP   22h
    ```
 
-   如果 `EXTERNAL-IP` 值存在，则说明环境正在使用外部负载均衡，可以用其为 ingress gateway 提供服务。如果 `EXTERNAL-IP`值为 `<none>`（或持续显示 `<pending>`），则说明环境没有提供外部负载均衡，无法使用 ingress gateway。可通过设置 `EXTERNAL-IP` 值，从外部访问。
-
-4. 设置 `EXTERNAL-IP`
-
-   执行如下命令，添加 `EXTERNAL-IP` 值，即：设置外部访问，常设置为 master 的 IP。
-
-   ```sh
-   kubectl edit  service istio-ingressgateway -n istio-system
-   ```
-
-   ![EXTERNAL-IP设置](EXTERNAL-IP-setting.png)
-
-   确认 `istio-ingressgateway` 的 `EXTERNAL-IP` 值是否设置成功：
-
-   ```sh
-   kubectl get  service istio-ingressgateway -n istio-system
-   ```
+   默认端口为 80。
 
 ## 3、确认可以从集群外部访问应用
 
