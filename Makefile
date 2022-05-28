@@ -6,7 +6,7 @@ docker := docker run --rm -v $(shell pwd):/gitbook -w /gitbook -p 4000:4000 $(im
 .PHONY: build
 build:
 	@$(docker) gitbook build
-	cp favicon.ico $(BOOK_OUTPUT)/gitbook/images
+#  cp favicon.ico $(BOOK_OUTPUT)/gitbook/images
 
 .PHONY: install
 install:
