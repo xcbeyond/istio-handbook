@@ -2,7 +2,13 @@
 
 `VirtualService` 与 `DestinationRule` 是流量控制最关键的两个自定义资源。在 `VirtualService` 中定义了**一组路由规则**，当流量进入时，逐个规则进行匹配，直到匹配成功后将流量转发给指定的路由地址。
 
-![VirtualService流程图](virtual-service.png)
+![VirtualService流程图](virtualservice.png)
+
+## 配置项
+
+下图是 VirtualService 的资源配置项：
+
+![VirtualService 资源配置项](virtualservice-configuration.png)
 
 ## 示例
 
