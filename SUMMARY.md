@@ -37,6 +37,7 @@
   - [ServiceEntry](traffic/crd/service-entry.md)
   - [EnvoyFilter](traffic/crd/envoy-filter.md)
   - [Sidecar](traffic/crd/sidecar.md)
+- [路由](traffic/route.md)
 - [负载均衡](traffic/load-balancing.md)
 - [流量镜像](traffic/traffic-shadow.md)
 - [Ingress](traffic/ingress.md)
