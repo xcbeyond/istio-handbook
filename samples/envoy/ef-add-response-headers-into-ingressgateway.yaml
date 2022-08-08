@@ -2,7 +2,6 @@ apiVersion: networking.istio.io/v1alpha3
 kind: EnvoyFilter
 metadata:
   name: ef-add-response-headers-into-ingressgateway
-  namespace: samples
 spec:
   workloadSelector:
     # select by label in the same namespace
