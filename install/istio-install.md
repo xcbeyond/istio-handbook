@@ -86,6 +86,8 @@ istioctl install --set profile=demo -y
 
    > 参数 `--set values.global.hub=xx`，用于设置 istio 安装所需镜像的私有仓库。更多 `--set` 参数值参考[https://istio.io/latest/docs/reference/config/istio.operator.v1alpha1/#IstioOperatorSpec](https://istio.io/latest/docs/reference/config/istio.operator.v1alpha1/#IstioOperatorSpec)
 
+   **对于ARM架构，截止2022年8月，isito 官方暂未提供相应的镜像，可将 `values.global.hub` 设置为 `ghcr.io/resf/istio` 进行安装。**
+
 ---
 
 参考资料：
