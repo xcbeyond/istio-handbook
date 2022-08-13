@@ -862,7 +862,7 @@
 </ul>
 <h2 id="1&#x3001;&#x914D;&#x7F6E;&#x9879;">1&#x3001;&#x914D;&#x7F6E;&#x9879;</h2>
 <p>&#x4E0B;&#x56FE;&#x662F; EnvoyFilter &#x7684;&#x8D44;&#x6E90;&#x914D;&#x7F6E;&#x9879;&#xFF1A;</p>
-<figure id="fig6.2.5.1"><a href="envoyfilter-configuration.png" data-lightbox="bfad4b7f-7636-477a-b0f7-3f13f3004a00" data-title="EnvoyFilter &#x8D44;&#x6E90;&#x914D;&#x7F6E;&#x9879;"><img src="envoyfilter-configuration.png" alt="EnvoyFilter &#x8D44;&#x6E90;&#x914D;&#x7F6E;&#x9879;"></a><figcaption>&#x56FE; 6.2.5.1&#xFF1A;EnvoyFilter &#x8D44;&#x6E90;&#x914D;&#x7F6E;&#x9879;</figcaption></figure>
+<figure id="fig6.2.5.1"><a href="envoyfilter-configuration.png" data-lightbox="9b958bb4-7d93-439d-96e2-4f2ca81a9905" data-title="EnvoyFilter &#x8D44;&#x6E90;&#x914D;&#x7F6E;&#x9879;"><img src="envoyfilter-configuration.png" alt="EnvoyFilter &#x8D44;&#x6E90;&#x914D;&#x7F6E;&#x9879;"></a><figcaption>&#x56FE; 6.2.5.1&#xFF1A;EnvoyFilter &#x8D44;&#x6E90;&#x914D;&#x7F6E;&#x9879;</figcaption></figure>
 <h2 id="2&#x3001;&#x793A;&#x4F8B;">2&#x3001;&#x793A;&#x4F8B;</h2>
 <h3 id="21-&#x524D;&#x63D0;&#x51C6;&#x5907;">2.1 &#x524D;&#x63D0;&#x51C6;&#x5907;</h3>
 <h4 id="211-&#x5F00;&#x542F;&#x6CE8;&#x5165;">2.1.1 &#x5F00;&#x542F;&#x6CE8;&#x5165;</h4>
@@ -952,75 +952,73 @@
 <pre class="language-"><code class="lang-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> networking.istio.io/v1alpha3
 <span class="token key atrule">kind</span><span class="token punctuation">:</span> EnvoyFilter
 <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
-   <span class="token key atrule">name</span><span class="token punctuation">:</span> ef<span class="token punctuation">-</span>add<span class="token punctuation">-</span>response<span class="token punctuation">-</span>headers<span class="token punctuation">-</span>into<span class="token punctuation">-</span>sidecar
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> ef<span class="token punctuation">-</span>add<span class="token punctuation">-</span>response<span class="token punctuation">-</span>headers<span class="token punctuation">-</span>into<span class="token punctuation">-</span>sidecar
 <span class="token key atrule">spec</span><span class="token punctuation">:</span>
-<span class="token key atrule">workloadSelector</span><span class="token punctuation">:</span>
-   <span class="token comment"># select by label in the same namespace</span>
-   <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+  <span class="token key atrule">workloadSelector</span><span class="token punctuation">:</span>
+    <span class="token comment"># select by label in the same namespace</span>
+    <span class="token key atrule">labels</span><span class="token punctuation">:</span>
       <span class="token key atrule">app</span><span class="token punctuation">:</span> helloworld
-<span class="token key atrule">configPatches</span><span class="token punctuation">:</span>
-   <span class="token comment"># The Envoy config you want to modify</span>
-<span class="token punctuation">-</span> <span class="token key atrule">applyTo</span><span class="token punctuation">:</span> HTTP_FILTER
-   <span class="token key atrule">match</span><span class="token punctuation">:</span>
+  <span class="token key atrule">configPatches</span><span class="token punctuation">:</span>
+    <span class="token comment"># The Envoy config you want to modify</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">applyTo</span><span class="token punctuation">:</span> HTTP_FILTER
+    <span class="token key atrule">match</span><span class="token punctuation">:</span>
       <span class="token key atrule">context</span><span class="token punctuation">:</span> SIDECAR_INBOUND
-      <span class="token key atrule">proxy</span><span class="token punctuation">:</span>
-      <span class="token key atrule">proxyVersion</span><span class="token punctuation">:</span> <span class="token string">&apos;^1\.9.*&apos;</span>
       <span class="token key atrule">listener</span><span class="token punctuation">:</span>
-      <span class="token key atrule">filterChain</span><span class="token punctuation">:</span>
-         <span class="token key atrule">filter</span><span class="token punctuation">:</span>
+        <span class="token key atrule">filterChain</span><span class="token punctuation">:</span>
+          <span class="token key atrule">filter</span><span class="token punctuation">:</span>
             <span class="token key atrule">name</span><span class="token punctuation">:</span> <span class="token string">&quot;envoy.filters.network.http_connection_manager&quot;</span>
             <span class="token key atrule">subFilter</span><span class="token punctuation">:</span>
-            <span class="token key atrule">name</span><span class="token punctuation">:</span> <span class="token string">&quot;envoy.filters.http.router&quot;</span>
-   <span class="token key atrule">patch</span><span class="token punctuation">:</span>
+              <span class="token key atrule">name</span><span class="token punctuation">:</span> <span class="token string">&quot;envoy.filters.http.router&quot;</span>
+    <span class="token key atrule">patch</span><span class="token punctuation">:</span>
       <span class="token key atrule">operation</span><span class="token punctuation">:</span> INSERT_BEFORE
       <span class="token key atrule">value</span><span class="token punctuation">:</span> <span class="token comment"># lua filter specification</span>
-      <span class="token key atrule">name</span><span class="token punctuation">:</span> envoy.lua
-      <span class="token key atrule">typed_config</span><span class="token punctuation">:</span>
-         <span class="token key atrule">&quot;@type&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;type.googleapis.com/envoy.extensions.filters.http.lua.v3.Lua&quot;</span>
-         <span class="token key atrule">inlineCode</span><span class="token punctuation">:</span> <span class="token punctuation">|</span><span class="token punctuation">-</span>
+        <span class="token key atrule">name</span><span class="token punctuation">:</span> envoy.lua
+        <span class="token key atrule">typed_config</span><span class="token punctuation">:</span>
+          <span class="token key atrule">&quot;@type&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;type.googleapis.com/envoy.extensions.filters.http.lua.v3.Lua&quot;</span>
+          <span class="token key atrule">inlineCode</span><span class="token punctuation">:</span> <span class="token punctuation">|</span><span class="token punctuation">-</span>
             function envoy_on_response(response_handle)
-               function hasFrameAncestors(rh)
-               s = rh<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;Content<span class="token punctuation">-</span>Security<span class="token punctuation">-</span>Policy&quot;);
-               delimiter = &quot;;&quot;;
-               defined = false;
-               for match in (s..delimiter)<span class="token punctuation">:</span>gmatch(&quot;(.<span class="token punctuation">-</span>)&quot;..delimiter) do
-                  match = match<span class="token punctuation">:</span>gsub(&quot;%s+&quot;<span class="token punctuation">,</span> &quot;&quot;);
-                  if match<span class="token punctuation">:</span>sub(1<span class="token punctuation">,</span> 15)==&quot;frame<span class="token punctuation">-</span>ancestors&quot; then
-                  return true;
-                  end
-               end
-               return false;
-               end
-               if not response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;Content<span class="token punctuation">-</span>Security<span class="token punctuation">-</span>Policy&quot;) then
-               csp = &quot;frame<span class="token punctuation">-</span>ancestors none;&quot;;
-               response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>add(&quot;Content<span class="token punctuation">-</span>Security<span class="token punctuation">-</span>Policy&quot;<span class="token punctuation">,</span> csp);
-               elseif response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;Content<span class="token punctuation">-</span>Security<span class="token punctuation">-</span>Policy&quot;) then
-               if not hasFrameAncestors(response_handle) then
-                  csp = response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;Content<span class="token punctuation">-</span>Security<span class="token punctuation">-</span>Policy&quot;);
-                  csp = csp .. &quot;;frame<span class="token punctuation">-</span>ancestors none;&quot;;
-                  response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>replace(&quot;Content<span class="token punctuation">-</span>Security<span class="token punctuation">-</span>Policy&quot;<span class="token punctuation">,</span> csp);
-               end
-               end
-               if not response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;X<span class="token punctuation">-</span>Frame<span class="token punctuation">-</span>Options&quot;) then
-               response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>add(&quot;X<span class="token punctuation">-</span>Frame<span class="token punctuation">-</span>Options&quot;<span class="token punctuation">,</span> &quot;deny&quot;);
-               end
-               if not response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;X<span class="token punctuation">-</span>XSS<span class="token punctuation">-</span>Protection&quot;) then
-               response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>add(&quot;X<span class="token punctuation">-</span>XSS<span class="token punctuation">-</span>Protection&quot;<span class="token punctuation">,</span> &quot;1; mode=block&quot;);
-               end
-               if not response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;X<span class="token punctuation">-</span>Content<span class="token punctuation">-</span>Type<span class="token punctuation">-</span>Options&quot;) then
-               response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>add(&quot;X<span class="token punctuation">-</span>Content<span class="token punctuation">-</span>Type<span class="token punctuation">-</span>Options&quot;<span class="token punctuation">,</span> &quot;nosniff&quot;);
-               end
-               if not response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;Referrer<span class="token punctuation">-</span>Policy&quot;) then
-               response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>add(&quot;Referrer<span class="token punctuation">-</span>Policy&quot;<span class="token punctuation">,</span> &quot;no<span class="token punctuation">-</span>referrer&quot;);
-               end
-               if not response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;X<span class="token punctuation">-</span>Download<span class="token punctuation">-</span>Options&quot;) then
-               response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>add(&quot;X<span class="token punctuation">-</span>Download<span class="token punctuation">-</span>Options&quot;<span class="token punctuation">,</span> &quot;noopen&quot;);
-               end
-               if not response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;X<span class="token punctuation">-</span>DNS<span class="token punctuation">-</span>Prefetch<span class="token punctuation">-</span>Control&quot;) then
-               response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>add(&quot;X<span class="token punctuation">-</span>DNS<span class="token punctuation">-</span>Prefetch<span class="token punctuation">-</span>Control&quot;<span class="token punctuation">,</span> &quot;off&quot;);
-               end
-               if not response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;Feature<span class="token punctuation">-</span>Policy&quot;) then
-               response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>add(&quot;Feature<span class="token punctuation">-</span>Policy&quot;<span class="token punctuation">,</span>
+                function hasFrameAncestors(rh)
+                s = rh<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;Content<span class="token punctuation">-</span>Security<span class="token punctuation">-</span>Policy&quot;);
+                delimiter = &quot;;&quot;;
+                defined = false;
+                for match in (s..delimiter)<span class="token punctuation">:</span>gmatch(&quot;(.<span class="token punctuation">-</span>)&quot;..delimiter) do
+                    match = match<span class="token punctuation">:</span>gsub(&quot;%s+&quot;<span class="token punctuation">,</span> &quot;&quot;);
+                    if match<span class="token punctuation">:</span>sub(1<span class="token punctuation">,</span> 15)==&quot;frame<span class="token punctuation">-</span>ancestors&quot; then
+                    return true;
+                    end
+                end
+                return false;
+                end
+                if not response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;Content<span class="token punctuation">-</span>Security<span class="token punctuation">-</span>Policy&quot;) then
+                csp = &quot;frame<span class="token punctuation">-</span>ancestors none;&quot;;
+                response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>add(&quot;Content<span class="token punctuation">-</span>Security<span class="token punctuation">-</span>Policy&quot;<span class="token punctuation">,</span> csp);
+                elseif response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;Content<span class="token punctuation">-</span>Security<span class="token punctuation">-</span>Policy&quot;) then
+                if not hasFrameAncestors(response_handle) then
+                    csp = response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;Content<span class="token punctuation">-</span>Security<span class="token punctuation">-</span>Policy&quot;);
+                    csp = csp .. &quot;;frame<span class="token punctuation">-</span>ancestors none;&quot;;
+                    response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>replace(&quot;Content<span class="token punctuation">-</span>Security<span class="token punctuation">-</span>Policy&quot;<span class="token punctuation">,</span> csp);
+                end
+                end
+                if not response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;X<span class="token punctuation">-</span>Frame<span class="token punctuation">-</span>Options&quot;) then
+                response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>add(&quot;X<span class="token punctuation">-</span>Frame<span class="token punctuation">-</span>Options&quot;<span class="token punctuation">,</span> &quot;deny&quot;);
+                end
+                if not response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;X<span class="token punctuation">-</span>XSS<span class="token punctuation">-</span>Protection&quot;) then
+                response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>add(&quot;X<span class="token punctuation">-</span>XSS<span class="token punctuation">-</span>Protection&quot;<span class="token punctuation">,</span> &quot;1; mode=block&quot;);
+                end
+                if not response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;X<span class="token punctuation">-</span>Content<span class="token punctuation">-</span>Type<span class="token punctuation">-</span>Options&quot;) then
+                response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>add(&quot;X<span class="token punctuation">-</span>Content<span class="token punctuation">-</span>Type<span class="token punctuation">-</span>Options&quot;<span class="token punctuation">,</span> &quot;nosniff&quot;);
+                end
+                if not response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;Referrer<span class="token punctuation">-</span>Policy&quot;) then
+                response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>add(&quot;Referrer<span class="token punctuation">-</span>Policy&quot;<span class="token punctuation">,</span> &quot;no<span class="token punctuation">-</span>referrer&quot;);
+                end
+                if not response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;X<span class="token punctuation">-</span>Download<span class="token punctuation">-</span>Options&quot;) then
+                response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>add(&quot;X<span class="token punctuation">-</span>Download<span class="token punctuation">-</span>Options&quot;<span class="token punctuation">,</span> &quot;noopen&quot;);
+                end
+                if not response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;X<span class="token punctuation">-</span>DNS<span class="token punctuation">-</span>Prefetch<span class="token punctuation">-</span>Control&quot;) then
+                response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>add(&quot;X<span class="token punctuation">-</span>DNS<span class="token punctuation">-</span>Prefetch<span class="token punctuation">-</span>Control&quot;<span class="token punctuation">,</span> &quot;off&quot;);
+                end
+                if not response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;Feature<span class="token punctuation">-</span>Policy&quot;) then
+                response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>add(&quot;Feature<span class="token punctuation">-</span>Policy&quot;<span class="token punctuation">,</span>
                                                 &quot;camera &apos;none&apos;;&quot;..
                                                 &quot;microphone &apos;none&apos;;&quot;..
                                                 &quot;geolocation &apos;none&apos;;&quot;..
@@ -1028,10 +1026,10 @@
                                                 &quot;payment &apos;none&apos;;&quot;..
                                                 &quot;speaker &apos;none&apos;;&quot;..
                                                 &quot;usb &apos;none&apos;;&quot;);
-               end
-               if response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;X<span class="token punctuation">-</span>Powered<span class="token punctuation">-</span>By&quot;) then
-               response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>remove(&quot;X<span class="token punctuation">-</span>Powered<span class="token punctuation">-</span>By&quot;);
-               end
+                end
+                if response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;X<span class="token punctuation">-</span>Powered<span class="token punctuation">-</span>By&quot;) then
+                response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>remove(&quot;X<span class="token punctuation">-</span>Powered<span class="token punctuation">-</span>By&quot;);
+                end
             end
 </code></pre>
 </li>
@@ -1068,75 +1066,73 @@
 <pre class="language-"><code class="lang-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> networking.istio.io/v1alpha3
 <span class="token key atrule">kind</span><span class="token punctuation">:</span> EnvoyFilter
 <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
-   <span class="token key atrule">name</span><span class="token punctuation">:</span> ef<span class="token punctuation">-</span>add<span class="token punctuation">-</span>response<span class="token punctuation">-</span>headers<span class="token punctuation">-</span>into<span class="token punctuation">-</span>ingressgateway
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> ef<span class="token punctuation">-</span>add<span class="token punctuation">-</span>response<span class="token punctuation">-</span>headers<span class="token punctuation">-</span>into<span class="token punctuation">-</span>ingressgateway
 <span class="token key atrule">spec</span><span class="token punctuation">:</span>
-<span class="token key atrule">workloadSelector</span><span class="token punctuation">:</span>
-   <span class="token comment"># select by label in the same namespace</span>
-   <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+  <span class="token key atrule">workloadSelector</span><span class="token punctuation">:</span>
+    <span class="token comment"># select by label in the same namespace</span>
+    <span class="token key atrule">labels</span><span class="token punctuation">:</span>
       <span class="token key atrule">istio</span><span class="token punctuation">:</span> ingressgateway
-<span class="token key atrule">configPatches</span><span class="token punctuation">:</span>
-   <span class="token comment"># The Envoy config you want to modify</span>
-<span class="token punctuation">-</span> <span class="token key atrule">applyTo</span><span class="token punctuation">:</span> HTTP_FILTER
-   <span class="token key atrule">match</span><span class="token punctuation">:</span>
+  <span class="token key atrule">configPatches</span><span class="token punctuation">:</span>
+    <span class="token comment"># The Envoy config you want to modify</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">applyTo</span><span class="token punctuation">:</span> HTTP_FILTER
+    <span class="token key atrule">match</span><span class="token punctuation">:</span>
       <span class="token key atrule">context</span><span class="token punctuation">:</span> GATEWAY
-      <span class="token key atrule">proxy</span><span class="token punctuation">:</span>
-      <span class="token key atrule">proxyVersion</span><span class="token punctuation">:</span> <span class="token string">&apos;^1\.9.*&apos;</span>
       <span class="token key atrule">listener</span><span class="token punctuation">:</span>
-      <span class="token key atrule">filterChain</span><span class="token punctuation">:</span>
-         <span class="token key atrule">filter</span><span class="token punctuation">:</span>
+        <span class="token key atrule">filterChain</span><span class="token punctuation">:</span>
+          <span class="token key atrule">filter</span><span class="token punctuation">:</span>
             <span class="token key atrule">name</span><span class="token punctuation">:</span> <span class="token string">&quot;envoy.filters.network.http_connection_manager&quot;</span>
             <span class="token key atrule">subFilter</span><span class="token punctuation">:</span>
-            <span class="token key atrule">name</span><span class="token punctuation">:</span> <span class="token string">&quot;envoy.filters.http.router&quot;</span>
-   <span class="token key atrule">patch</span><span class="token punctuation">:</span>
+              <span class="token key atrule">name</span><span class="token punctuation">:</span> <span class="token string">&quot;envoy.filters.http.router&quot;</span>
+    <span class="token key atrule">patch</span><span class="token punctuation">:</span>
       <span class="token key atrule">operation</span><span class="token punctuation">:</span> INSERT_BEFORE
       <span class="token key atrule">value</span><span class="token punctuation">:</span> <span class="token comment"># lua filter specification</span>
-      <span class="token key atrule">name</span><span class="token punctuation">:</span> envoy.lua
-      <span class="token key atrule">typed_config</span><span class="token punctuation">:</span>
-         <span class="token key atrule">&quot;@type&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;type.googleapis.com/envoy.extensions.filters.http.lua.v3.Lua&quot;</span>
-         <span class="token key atrule">inlineCode</span><span class="token punctuation">:</span> <span class="token punctuation">|</span><span class="token punctuation">-</span>
+        <span class="token key atrule">name</span><span class="token punctuation">:</span> envoy.lua
+        <span class="token key atrule">typed_config</span><span class="token punctuation">:</span>
+          <span class="token key atrule">&quot;@type&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;type.googleapis.com/envoy.extensions.filters.http.lua.v3.Lua&quot;</span>
+          <span class="token key atrule">inlineCode</span><span class="token punctuation">:</span> <span class="token punctuation">|</span><span class="token punctuation">-</span>
             function envoy_on_response(response_handle)
-               function hasFrameAncestors(rh)
-               s = rh<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;Content<span class="token punctuation">-</span>Security<span class="token punctuation">-</span>Policy&quot;);
-               delimiter = &quot;;&quot;;
-               defined = false;
-               for match in (s..delimiter)<span class="token punctuation">:</span>gmatch(&quot;(.<span class="token punctuation">-</span>)&quot;..delimiter) do
-                  match = match<span class="token punctuation">:</span>gsub(&quot;%s+&quot;<span class="token punctuation">,</span> &quot;&quot;);
-                  if match<span class="token punctuation">:</span>sub(1<span class="token punctuation">,</span> 15)==&quot;frame<span class="token punctuation">-</span>ancestors&quot; then
-                  return true;
-                  end
-               end
-               return false;
-               end
-               if not response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;Content<span class="token punctuation">-</span>Security<span class="token punctuation">-</span>Policy&quot;) then
-               csp = &quot;frame<span class="token punctuation">-</span>ancestors none;&quot;;
-               response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>add(&quot;Content<span class="token punctuation">-</span>Security<span class="token punctuation">-</span>Policy&quot;<span class="token punctuation">,</span> csp);
-               elseif response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;Content<span class="token punctuation">-</span>Security<span class="token punctuation">-</span>Policy&quot;) then
-               if not hasFrameAncestors(response_handle) then
-                  csp = response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;Content<span class="token punctuation">-</span>Security<span class="token punctuation">-</span>Policy&quot;);
-                  csp = csp .. &quot;;frame<span class="token punctuation">-</span>ancestors none;&quot;;
-                  response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>replace(&quot;Content<span class="token punctuation">-</span>Security<span class="token punctuation">-</span>Policy&quot;<span class="token punctuation">,</span> csp);
-               end
-               end
-               if not response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;X<span class="token punctuation">-</span>Frame<span class="token punctuation">-</span>Options&quot;) then
-               response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>add(&quot;X<span class="token punctuation">-</span>Frame<span class="token punctuation">-</span>Options&quot;<span class="token punctuation">,</span> &quot;deny&quot;);
-               end
-               if not response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;X<span class="token punctuation">-</span>XSS<span class="token punctuation">-</span>Protection&quot;) then
-               response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>add(&quot;X<span class="token punctuation">-</span>XSS<span class="token punctuation">-</span>Protection&quot;<span class="token punctuation">,</span> &quot;1; mode=block&quot;);
-               end
-               if not response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;X<span class="token punctuation">-</span>Content<span class="token punctuation">-</span>Type<span class="token punctuation">-</span>Options&quot;) then
-               response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>add(&quot;X<span class="token punctuation">-</span>Content<span class="token punctuation">-</span>Type<span class="token punctuation">-</span>Options&quot;<span class="token punctuation">,</span> &quot;nosniff&quot;);
-               end
-               if not response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;Referrer<span class="token punctuation">-</span>Policy&quot;) then
-               response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>add(&quot;Referrer<span class="token punctuation">-</span>Policy&quot;<span class="token punctuation">,</span> &quot;no<span class="token punctuation">-</span>referrer&quot;);
-               end
-               if not response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;X<span class="token punctuation">-</span>Download<span class="token punctuation">-</span>Options&quot;) then
-               response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>add(&quot;X<span class="token punctuation">-</span>Download<span class="token punctuation">-</span>Options&quot;<span class="token punctuation">,</span> &quot;noopen&quot;);
-               end
-               if not response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;X<span class="token punctuation">-</span>DNS<span class="token punctuation">-</span>Prefetch<span class="token punctuation">-</span>Control&quot;) then
-               response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>add(&quot;X<span class="token punctuation">-</span>DNS<span class="token punctuation">-</span>Prefetch<span class="token punctuation">-</span>Control&quot;<span class="token punctuation">,</span> &quot;off&quot;);
-               end
-               if not response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;Feature<span class="token punctuation">-</span>Policy&quot;) then
-               response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>add(&quot;Feature<span class="token punctuation">-</span>Policy&quot;<span class="token punctuation">,</span>
+                function hasFrameAncestors(rh)
+                s = rh<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;Content<span class="token punctuation">-</span>Security<span class="token punctuation">-</span>Policy&quot;);
+                delimiter = &quot;;&quot;;
+                defined = false;
+                for match in (s..delimiter)<span class="token punctuation">:</span>gmatch(&quot;(.<span class="token punctuation">-</span>)&quot;..delimiter) do
+                    match = match<span class="token punctuation">:</span>gsub(&quot;%s+&quot;<span class="token punctuation">,</span> &quot;&quot;);
+                    if match<span class="token punctuation">:</span>sub(1<span class="token punctuation">,</span> 15)==&quot;frame<span class="token punctuation">-</span>ancestors&quot; then
+                    return true;
+                    end
+                end
+                return false;
+                end
+                if not response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;Content<span class="token punctuation">-</span>Security<span class="token punctuation">-</span>Policy&quot;) then
+                csp = &quot;frame<span class="token punctuation">-</span>ancestors none;&quot;;
+                response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>add(&quot;Content<span class="token punctuation">-</span>Security<span class="token punctuation">-</span>Policy&quot;<span class="token punctuation">,</span> csp);
+                elseif response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;Content<span class="token punctuation">-</span>Security<span class="token punctuation">-</span>Policy&quot;) then
+                if not hasFrameAncestors(response_handle) then
+                    csp = response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;Content<span class="token punctuation">-</span>Security<span class="token punctuation">-</span>Policy&quot;);
+                    csp = csp .. &quot;;frame<span class="token punctuation">-</span>ancestors none;&quot;;
+                    response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>replace(&quot;Content<span class="token punctuation">-</span>Security<span class="token punctuation">-</span>Policy&quot;<span class="token punctuation">,</span> csp);
+                end
+                end
+                if not response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;X<span class="token punctuation">-</span>Frame<span class="token punctuation">-</span>Options&quot;) then
+                response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>add(&quot;X<span class="token punctuation">-</span>Frame<span class="token punctuation">-</span>Options&quot;<span class="token punctuation">,</span> &quot;deny&quot;);
+                end
+                if not response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;X<span class="token punctuation">-</span>XSS<span class="token punctuation">-</span>Protection&quot;) then
+                response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>add(&quot;X<span class="token punctuation">-</span>XSS<span class="token punctuation">-</span>Protection&quot;<span class="token punctuation">,</span> &quot;1; mode=block&quot;);
+                end
+                if not response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;X<span class="token punctuation">-</span>Content<span class="token punctuation">-</span>Type<span class="token punctuation">-</span>Options&quot;) then
+                response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>add(&quot;X<span class="token punctuation">-</span>Content<span class="token punctuation">-</span>Type<span class="token punctuation">-</span>Options&quot;<span class="token punctuation">,</span> &quot;nosniff&quot;);
+                end
+                if not response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;Referrer<span class="token punctuation">-</span>Policy&quot;) then
+                response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>add(&quot;Referrer<span class="token punctuation">-</span>Policy&quot;<span class="token punctuation">,</span> &quot;no<span class="token punctuation">-</span>referrer&quot;);
+                end
+                if not response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;X<span class="token punctuation">-</span>Download<span class="token punctuation">-</span>Options&quot;) then
+                response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>add(&quot;X<span class="token punctuation">-</span>Download<span class="token punctuation">-</span>Options&quot;<span class="token punctuation">,</span> &quot;noopen&quot;);
+                end
+                if not response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;X<span class="token punctuation">-</span>DNS<span class="token punctuation">-</span>Prefetch<span class="token punctuation">-</span>Control&quot;) then
+                response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>add(&quot;X<span class="token punctuation">-</span>DNS<span class="token punctuation">-</span>Prefetch<span class="token punctuation">-</span>Control&quot;<span class="token punctuation">,</span> &quot;off&quot;);
+                end
+                if not response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;Feature<span class="token punctuation">-</span>Policy&quot;) then
+                response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>add(&quot;Feature<span class="token punctuation">-</span>Policy&quot;<span class="token punctuation">,</span>
                                                 &quot;camera &apos;none&apos;;&quot;..
                                                 &quot;microphone &apos;none&apos;;&quot;..
                                                 &quot;geolocation &apos;none&apos;;&quot;..
@@ -1144,10 +1140,10 @@
                                                 &quot;payment &apos;none&apos;;&quot;..
                                                 &quot;speaker &apos;none&apos;;&quot;..
                                                 &quot;usb &apos;none&apos;;&quot;);
-               end
-               if response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;X<span class="token punctuation">-</span>Powered<span class="token punctuation">-</span>By&quot;) then
-               response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>remove(&quot;X<span class="token punctuation">-</span>Powered<span class="token punctuation">-</span>By&quot;);
-               end
+                end
+                if response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>get(&quot;X<span class="token punctuation">-</span>Powered<span class="token punctuation">-</span>By&quot;) then
+                response_handle<span class="token punctuation">:</span>headers()<span class="token punctuation">:</span>remove(&quot;X<span class="token punctuation">-</span>Powered<span class="token punctuation">-</span>By&quot;);
+                end
             end
 </code></pre>
 </li>
@@ -1194,42 +1190,42 @@ $ kubectl get svc -n istio-system
 <pre class="language-"><code class="lang-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> networking.istio.io/v1alpha3
 <span class="token key atrule">kind</span><span class="token punctuation">:</span> EnvoyFilter
 <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
-   <span class="token key atrule">name</span><span class="token punctuation">:</span> ef<span class="token punctuation">-</span>envoy<span class="token punctuation">-</span>direct<span class="token punctuation">-</span>response.yaml
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> ef<span class="token punctuation">-</span>envoy<span class="token punctuation">-</span>direct<span class="token punctuation">-</span>response
 <span class="token key atrule">spec</span><span class="token punctuation">:</span>
-<span class="token key atrule">workloadSelector</span><span class="token punctuation">:</span>
-   <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+  <span class="token key atrule">workloadSelector</span><span class="token punctuation">:</span>
+    <span class="token key atrule">labels</span><span class="token punctuation">:</span>
       <span class="token key atrule">app</span><span class="token punctuation">:</span> helloworld
-<span class="token key atrule">configPatches</span><span class="token punctuation">:</span>
-<span class="token punctuation">-</span> <span class="token key atrule">applyTo</span><span class="token punctuation">:</span> NETWORK_FILTER
-   <span class="token key atrule">match</span><span class="token punctuation">:</span>
+  <span class="token key atrule">configPatches</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">applyTo</span><span class="token punctuation">:</span> NETWORK_FILTER
+    <span class="token key atrule">match</span><span class="token punctuation">:</span>
       <span class="token key atrule">context</span><span class="token punctuation">:</span> SIDECAR_INBOUND
       <span class="token key atrule">listener</span><span class="token punctuation">:</span>
-      <span class="token key atrule">filterChain</span><span class="token punctuation">:</span>
-         <span class="token key atrule">filter</span><span class="token punctuation">:</span>
+        <span class="token key atrule">filterChain</span><span class="token punctuation">:</span>
+          <span class="token key atrule">filter</span><span class="token punctuation">:</span>
             <span class="token key atrule">name</span><span class="token punctuation">:</span> <span class="token string">&quot;envoy.filters.network.http_connection_manager&quot;</span>
-   <span class="token key atrule">patch</span><span class="token punctuation">:</span>
+    <span class="token key atrule">patch</span><span class="token punctuation">:</span>
       <span class="token key atrule">operation</span><span class="token punctuation">:</span> REPLACE
       <span class="token key atrule">value</span><span class="token punctuation">:</span>
-      <span class="token key atrule">name</span><span class="token punctuation">:</span> envoy.filters.network.http_connection_manager
-      <span class="token key atrule">typed_config</span><span class="token punctuation">:</span>
-         <span class="token key atrule">&quot;@type&quot;</span><span class="token punctuation">:</span> type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
-         <span class="token key atrule">stat_prefix</span><span class="token punctuation">:</span> hello
-         <span class="token key atrule">route_config</span><span class="token punctuation">:</span>
+        <span class="token key atrule">name</span><span class="token punctuation">:</span> envoy.filters.network.http_connection_manager
+        <span class="token key atrule">typed_config</span><span class="token punctuation">:</span>
+          <span class="token key atrule">&quot;@type&quot;</span><span class="token punctuation">:</span> type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+          <span class="token key atrule">stat_prefix</span><span class="token punctuation">:</span> hello
+          <span class="token key atrule">route_config</span><span class="token punctuation">:</span>
             <span class="token key atrule">name</span><span class="token punctuation">:</span> my_first_route
             <span class="token key atrule">virtual_hosts</span><span class="token punctuation">:</span>
             <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> direct_response_service
-            <span class="token key atrule">domains</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;helloworld.samples&quot;</span><span class="token punctuation">]</span>
-            <span class="token key atrule">routes</span><span class="token punctuation">:</span>
-            <span class="token punctuation">-</span> <span class="token key atrule">match</span><span class="token punctuation">:</span>
+              <span class="token key atrule">domains</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;helloworld.samples&quot;</span><span class="token punctuation">]</span>
+              <span class="token key atrule">routes</span><span class="token punctuation">:</span>
+              <span class="token punctuation">-</span> <span class="token key atrule">match</span><span class="token punctuation">:</span>
                   <span class="token key atrule">prefix</span><span class="token punctuation">:</span> <span class="token string">&quot;/&quot;</span>
-               <span class="token key atrule">direct_response</span><span class="token punctuation">:</span>
+                <span class="token key atrule">direct_response</span><span class="token punctuation">:</span>
                   <span class="token key atrule">status</span><span class="token punctuation">:</span> <span class="token number">200</span>
                   <span class="token key atrule">body</span><span class="token punctuation">:</span>
-                  <span class="token key atrule">inline_string</span><span class="token punctuation">:</span> <span class="token string">&quot;envoy direct response.&quot;</span>
-         <span class="token key atrule">http_filters</span><span class="token punctuation">:</span>
-         <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> envoy.filters.http.router
+                    <span class="token key atrule">inline_string</span><span class="token punctuation">:</span> <span class="token string">&quot;envoy direct response.&quot;</span>
+          <span class="token key atrule">http_filters</span><span class="token punctuation">:</span>
+          <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> envoy.filters.http.router
             <span class="token key atrule">typed_config</span><span class="token punctuation">:</span>
-            <span class="token key atrule">&quot;@type&quot;</span><span class="token punctuation">:</span> type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
+              <span class="token key atrule">&quot;@type&quot;</span><span class="token punctuation">:</span> type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
 </code></pre>
 </li>
 <li><p>&#x9A8C;&#x8BC1;&#x3002;</p>
@@ -1255,7 +1251,7 @@ $ kubectl get svc -n istio-system
 <li><a href="https://help.aliyun.com/document_detail/158520.html" target="_blank">&#x5728;ASM&#x4E2D;&#x901A;&#x8FC7;EnvoyFilter&#x6DFB;&#x52A0;HTTP&#x54CD;&#x5E94;&#x5934;</a> </li>
 </ol>
 <footer class="page-footer"><span class="copyright">Copyright &#xA9; <a href="https://xcbeyond.cn" target="_blank">xcbeyond.cn</a> 2021 all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification"> Updated at 
-2022-08-08 14:51:30
+2022-08-13 12:59:03
 </span></footer>
                                 
                                 </section>
@@ -1299,7 +1295,7 @@ $ kubectl get svc -n istio-system
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"EnvoyFilter","level":"6.2.5","depth":2,"next":{"title":"Sidecar","level":"6.2.6","depth":2,"path":"traffic/crd/sidecar.md","ref":"traffic/crd/sidecar.md","articles":[]},"previous":{"title":"ServiceEntry","level":"6.2.4","depth":2,"path":"traffic/crd/service-entry.md","ref":"traffic/crd/service-entry.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","codesnippet","splitter","page-toc-button","image-captions","lightbox","editlink","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","theme-default","favicon@^0.0.2","tbfed-pagefooter@^0.0.1","-highlight","prism","prism-themes","code","-copy-code-button","donate"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright © <a href=https://xcbeyond.cn>xcbeyond.cn</a> 2021","modify_label":" Updated at ","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{},"github":{"url":"https://github.com/xcbeyond/istio-handbook"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/xcbeyond/istio-handbook/blob/main/"},"splitter":{},"code":{"copyButtons":true},"donate":{"alipay":"https://xcbeyond.cn/images/qrcode/alipay.png","alipayText":"支付宝打赏","button":"赏","title":"","wechat":"https://xcbeyond.cn/images/qrcode/wechatpay.jpg","wechatText":"微信打赏"},"codesnippet":{},"fontsettings":{"theme":"white","family":"sans","size":2},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"lightbox":{"jquery":true,"sameUuid":false},"page-toc-button":{},"back-to-top-button":{},"prism-themes":{},"github-buttons":{"repo":"xcbeyond/istio-handbook","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","variable_name":"_pictures"}},"theme":"default","author":"xcbeyond","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"_pictures":[{"backlink":"microservice/new-generation-microservices-architecture.html#fig2.1.1","level":"2.1","list_caption":"Figure: 现实中和PPT中的微服务对比","alt":"现实中和PPT中的微服务对比","nro":1,"url":"现实中vsPPT中的微服务.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"现实中和PPT中的微服务对比","attributes":{},"skip":false,"key":"2.1.1"},{"backlink":"microservice/new-generation-microservices-architecture.html#fig2.1.2","level":"2.1","list_caption":"Figure: 耦合阶段","alt":"耦合阶段","nro":2,"url":"将网络功能和业务逻辑耦合在一起.png","index":2,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"耦合阶段","attributes":{},"skip":false,"key":"2.1.2"},{"backlink":"microservice/new-generation-microservices-architecture.html#fig2.1.3","level":"2.1","list_caption":"Figure: 公共库SDK阶段","alt":"公共库SDK阶段","nro":3,"url":"网络功能被封装在公共库里.png","index":3,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"公共库SDK阶段","attributes":{},"skip":false,"key":"2.1.3"},{"backlink":"microservice/new-generation-microservices-architecture.html#fig2.1.4","level":"2.1","list_caption":"Figure: Sidecar模式阶段","alt":"Sidecar模式阶段","nro":4,"url":"Sidecar模式.png","index":4,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Sidecar模式阶段","attributes":{},"skip":false,"key":"2.1.4"},{"backlink":"microservice/new-generation-microservices-architecture.html#fig2.1.5","level":"2.1","list_caption":"Figure: Service Mesh阶段","alt":"Service Mesh阶段","nro":5,"url":"服务网格网状结构.png","index":5,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Service Mesh阶段","attributes":{},"skip":false,"key":"2.1.5"},{"backlink":"servicemesh/introduction.html#fig3.1.1","level":"3.1","list_caption":"Figure: 服务网格的演进历程","alt":"服务网格的演进历程","nro":6,"url":"service-mesh-evolution.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"服务网格的演进历程","attributes":{},"skip":false,"key":"3.1.1"},{"backlink":"servicemesh/introduction.html#fig3.1.2","level":"3.1","list_caption":"Figure: 云原生技术","alt":"云原生技术","nro":7,"url":"cloudnative-technology.png","index":2,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"云原生技术","attributes":{},"skip":false,"key":"3.1.2"},{"backlink":"servicemesh/introduction.html#fig3.1.3","level":"3.1","list_caption":"Figure: 服务网格部署网络结构图","alt":"服务网格部署网络结构图","nro":8,"url":"service-mesh-network-struct.png","index":3,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"服务网格部署网络结构图","attributes":{},"skip":false,"key":"3.1.3"},{"backlink":"servicemesh/introduction.html#fig3.1.4","level":"3.1","list_caption":"Figure: Service Mesh架构图","alt":"Service Mesh架构图","nro":9,"url":"service-mesh-architecture.png","index":4,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Service Mesh架构图","attributes":{},"skip":false,"key":"3.1.4"},{"backlink":"servicemesh/framework-contrast.html#fig3.2.1","level":"3.2","list_caption":"Figure: Linkerd架构图","alt":"Linkerd架构图","nro":10,"url":"linkerd-architecture.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Linkerd架构图","attributes":{},"skip":false,"key":"3.2.1"},{"backlink":"servicemesh/framework-contrast.html#fig3.2.2","level":"3.2","list_caption":"Figure: Istio架构图","alt":"Istio架构图","nro":11,"url":"istio-architecture.png","index":2,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Istio架构图","attributes":{},"skip":false,"key":"3.2.2"},{"backlink":"architecture/istio-architecture.html#fig4.1.1","level":"4.1","list_caption":"Figure: Istio架构图","alt":"Istio架构图","nro":12,"url":"istio-architecture.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Istio架构图","attributes":{},"skip":false,"key":"4.1.1"},{"backlink":"architecture/istio-architecture.html#fig4.1.2","level":"4.1","list_caption":"Figure: Istio架构演进","alt":"Istio架构演进","nro":13,"url":"istio-architecture-evolution.png","index":2,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Istio架构演进","attributes":{},"skip":false,"key":"4.1.2"},{"backlink":"architecture/dataplane.html#fig4.2.1","level":"4.2","list_caption":"Figure: Istio数据平面架构图","alt":"Istio数据平面架构图","nro":14,"url":"istio-dataplane-architecture.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Istio数据平面架构图","attributes":{},"skip":false,"key":"4.2.1"},{"backlink":"architecture/controlplane.html#fig4.3.1","level":"4.3","list_caption":"Figure: Pilot架构图","alt":"Pilot架构图","nro":15,"url":"pilot-arch.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Pilot架构图","attributes":{},"skip":false,"key":"4.3.1"},{"backlink":"architecture/controlplane.html#fig4.3.2","level":"4.3","list_caption":"Figure: Pilot实现","alt":"Pilot实现","nro":16,"url":"pilot-process.png","index":2,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Pilot实现","attributes":{},"skip":false,"key":"4.3.2"},{"backlink":"architecture/controlplane.html#fig4.3.3","level":"4.3","list_caption":"Figure: Citadel身份认证流程","alt":"Citadel身份认证流程","nro":17,"url":"citadel-identity-authentication-process.png","index":3,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Citadel身份认证流程","attributes":{},"skip":false,"key":"4.3.3"},{"backlink":"install/deploy-bookinfo-sample.html#fig5.3.1","level":"5.3","list_caption":"Figure: Bookinfo部署图","alt":"Bookinfo部署图","nro":18,"url":"bookinfo.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Bookinfo部署图","attributes":{},"skip":false,"key":"5.3.1"},{"backlink":"install/deploy-bookinfo-sample.html#fig5.3.2","level":"5.3","list_caption":"Figure: BookInfo应用页面","alt":"BookInfo应用页面","nro":19,"url":"bookinfo-pages.png","index":2,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"BookInfo应用页面","attributes":{},"skip":false,"key":"5.3.2"},{"backlink":"install/deploy-kiali.html#fig5.4.1","level":"5.4","list_caption":"Figure: Kiali Graph","alt":"Kiali Graph","nro":20,"url":"kiali-graph.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Kiali Graph","attributes":{},"skip":false,"key":"5.4.1"},{"backlink":"traffic/crd/virtual-service.html#fig6.2.1.1","level":"6.2.1","list_caption":"Figure: VirtualService流程图","alt":"VirtualService流程图","nro":21,"url":"virtualservice.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"VirtualService流程图","attributes":{},"skip":false,"key":"6.2.1.1"},{"backlink":"traffic/crd/virtual-service.html#fig6.2.1.2","level":"6.2.1","list_caption":"Figure: VirtualService 资源配置项","alt":"VirtualService 资源配置项","nro":22,"url":"virtualservice-configuration.png","index":2,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"VirtualService 资源配置项","attributes":{},"skip":false,"key":"6.2.1.2"},{"backlink":"traffic/crd/gateway.html#fig6.2.3.1","level":"6.2.3","list_caption":"Figure: Gateway流程图","alt":"Gateway流程图","nro":23,"url":"gateway.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Gateway流程图","attributes":{},"skip":false,"key":"6.2.3.1"},{"backlink":"traffic/crd/service-entry.html#fig6.2.4.1","level":"6.2.4","list_caption":"Figure: ServiceEntry流程图","alt":"ServiceEntry流程图","nro":24,"url":"service-entry.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"ServiceEntry流程图","attributes":{},"skip":false,"key":"6.2.4.1"},{"backlink":"traffic/crd/envoy-filter.html#fig6.2.5.1","level":"6.2.5","list_caption":"Figure: EnvoyFilter 资源配置项","alt":"EnvoyFilter 资源配置项","nro":25,"url":"envoyfilter-configuration.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"EnvoyFilter 资源配置项","attributes":{},"skip":false,"key":"6.2.5.1"},{"backlink":"traffic/gray-release.html#fig6.13.1","level":"6.13","list_caption":"Figure: 灰度发布","alt":"灰度发布","nro":26,"url":"gray-release.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"灰度发布","attributes":{},"skip":false,"key":"6.13.1"},{"backlink":"traffic/gray-release.html#fig6.13.2","level":"6.13","list_caption":"Figure: 灰度发布示例图","alt":"灰度发布示例图","nro":27,"url":"gray-release-demo.svg","index":2,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"灰度发布示例图","attributes":{},"skip":false,"key":"6.13.2"}]},"title":"Istio Handbook - Istio 实践手册","language":"zh-hans","links":{"sidebar":{"xcbeyond个人博客":"https://xcbeyond.cn/"}},"gitbook":"*","description":"Istio Handbook - Istio 实践手册，本文记录了本人从零开始接触 Istio 的学习历程，从开发者的视角来看，将日常学习内容进行总结和分享。从服务网格概念出发，将逐步渗透到 Istio 具体细节中来，旨在帮助 Istio 学习者、使用者快速掌握相关知识点，可作为 Istio 学习、实践手册。"},"file":{"path":"traffic/crd/envoy-filter.md","mtime":"2022-08-08T06:51:30.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-08-08T10:26:36.096Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"EnvoyFilter","level":"6.2.5","depth":2,"next":{"title":"Sidecar","level":"6.2.6","depth":2,"path":"traffic/crd/sidecar.md","ref":"traffic/crd/sidecar.md","articles":[]},"previous":{"title":"ServiceEntry","level":"6.2.4","depth":2,"path":"traffic/crd/service-entry.md","ref":"traffic/crd/service-entry.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","codesnippet","splitter","page-toc-button","image-captions","lightbox","editlink","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","theme-default","favicon@^0.0.2","tbfed-pagefooter@^0.0.1","-highlight","prism","prism-themes","code","-copy-code-button","donate"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright © <a href=https://xcbeyond.cn>xcbeyond.cn</a> 2021","modify_label":" Updated at ","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{},"github":{"url":"https://github.com/xcbeyond/istio-handbook"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/xcbeyond/istio-handbook/blob/main/"},"splitter":{},"code":{"copyButtons":true},"donate":{"alipay":"https://xcbeyond.cn/images/qrcode/alipay.png","alipayText":"支付宝打赏","button":"赏","title":"","wechat":"https://xcbeyond.cn/images/qrcode/wechatpay.jpg","wechatText":"微信打赏"},"codesnippet":{},"fontsettings":{"theme":"white","family":"sans","size":2},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"lightbox":{"jquery":true,"sameUuid":false},"page-toc-button":{},"back-to-top-button":{},"prism-themes":{},"github-buttons":{"repo":"xcbeyond/istio-handbook","types":["star"],"size":"small"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","variable_name":"_pictures"}},"theme":"default","author":"xcbeyond","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"_pictures":[{"backlink":"microservice/new-generation-microservices-architecture.html#fig2.1.1","level":"2.1","list_caption":"Figure: 现实中和PPT中的微服务对比","alt":"现实中和PPT中的微服务对比","nro":1,"url":"现实中vsPPT中的微服务.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"现实中和PPT中的微服务对比","attributes":{},"skip":false,"key":"2.1.1"},{"backlink":"microservice/new-generation-microservices-architecture.html#fig2.1.2","level":"2.1","list_caption":"Figure: 耦合阶段","alt":"耦合阶段","nro":2,"url":"将网络功能和业务逻辑耦合在一起.png","index":2,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"耦合阶段","attributes":{},"skip":false,"key":"2.1.2"},{"backlink":"microservice/new-generation-microservices-architecture.html#fig2.1.3","level":"2.1","list_caption":"Figure: 公共库SDK阶段","alt":"公共库SDK阶段","nro":3,"url":"网络功能被封装在公共库里.png","index":3,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"公共库SDK阶段","attributes":{},"skip":false,"key":"2.1.3"},{"backlink":"microservice/new-generation-microservices-architecture.html#fig2.1.4","level":"2.1","list_caption":"Figure: Sidecar模式阶段","alt":"Sidecar模式阶段","nro":4,"url":"Sidecar模式.png","index":4,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Sidecar模式阶段","attributes":{},"skip":false,"key":"2.1.4"},{"backlink":"microservice/new-generation-microservices-architecture.html#fig2.1.5","level":"2.1","list_caption":"Figure: Service Mesh阶段","alt":"Service Mesh阶段","nro":5,"url":"服务网格网状结构.png","index":5,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Service Mesh阶段","attributes":{},"skip":false,"key":"2.1.5"},{"backlink":"servicemesh/introduction.html#fig3.1.1","level":"3.1","list_caption":"Figure: 服务网格的演进历程","alt":"服务网格的演进历程","nro":6,"url":"service-mesh-evolution.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"服务网格的演进历程","attributes":{},"skip":false,"key":"3.1.1"},{"backlink":"servicemesh/introduction.html#fig3.1.2","level":"3.1","list_caption":"Figure: 云原生技术","alt":"云原生技术","nro":7,"url":"cloudnative-technology.png","index":2,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"云原生技术","attributes":{},"skip":false,"key":"3.1.2"},{"backlink":"servicemesh/introduction.html#fig3.1.3","level":"3.1","list_caption":"Figure: 服务网格部署网络结构图","alt":"服务网格部署网络结构图","nro":8,"url":"service-mesh-network-struct.png","index":3,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"服务网格部署网络结构图","attributes":{},"skip":false,"key":"3.1.3"},{"backlink":"servicemesh/introduction.html#fig3.1.4","level":"3.1","list_caption":"Figure: Service Mesh架构图","alt":"Service Mesh架构图","nro":9,"url":"service-mesh-architecture.png","index":4,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Service Mesh架构图","attributes":{},"skip":false,"key":"3.1.4"},{"backlink":"servicemesh/framework-contrast.html#fig3.2.1","level":"3.2","list_caption":"Figure: Linkerd架构图","alt":"Linkerd架构图","nro":10,"url":"linkerd-architecture.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Linkerd架构图","attributes":{},"skip":false,"key":"3.2.1"},{"backlink":"servicemesh/framework-contrast.html#fig3.2.2","level":"3.2","list_caption":"Figure: Istio架构图","alt":"Istio架构图","nro":11,"url":"istio-architecture.png","index":2,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Istio架构图","attributes":{},"skip":false,"key":"3.2.2"},{"backlink":"architecture/istio-architecture.html#fig4.1.1","level":"4.1","list_caption":"Figure: Istio架构图","alt":"Istio架构图","nro":12,"url":"istio-architecture.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Istio架构图","attributes":{},"skip":false,"key":"4.1.1"},{"backlink":"architecture/istio-architecture.html#fig4.1.2","level":"4.1","list_caption":"Figure: Istio架构演进","alt":"Istio架构演进","nro":13,"url":"istio-architecture-evolution.png","index":2,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Istio架构演进","attributes":{},"skip":false,"key":"4.1.2"},{"backlink":"architecture/dataplane.html#fig4.2.1","level":"4.2","list_caption":"Figure: Istio数据平面架构图","alt":"Istio数据平面架构图","nro":14,"url":"istio-dataplane-architecture.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Istio数据平面架构图","attributes":{},"skip":false,"key":"4.2.1"},{"backlink":"architecture/controlplane.html#fig4.3.1","level":"4.3","list_caption":"Figure: Pilot架构图","alt":"Pilot架构图","nro":15,"url":"pilot-arch.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Pilot架构图","attributes":{},"skip":false,"key":"4.3.1"},{"backlink":"architecture/controlplane.html#fig4.3.2","level":"4.3","list_caption":"Figure: Pilot实现","alt":"Pilot实现","nro":16,"url":"pilot-process.png","index":2,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Pilot实现","attributes":{},"skip":false,"key":"4.3.2"},{"backlink":"architecture/controlplane.html#fig4.3.3","level":"4.3","list_caption":"Figure: Citadel身份认证流程","alt":"Citadel身份认证流程","nro":17,"url":"citadel-identity-authentication-process.png","index":3,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Citadel身份认证流程","attributes":{},"skip":false,"key":"4.3.3"},{"backlink":"install/deploy-bookinfo-sample.html#fig5.3.1","level":"5.3","list_caption":"Figure: Bookinfo部署图","alt":"Bookinfo部署图","nro":18,"url":"bookinfo.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Bookinfo部署图","attributes":{},"skip":false,"key":"5.3.1"},{"backlink":"install/deploy-bookinfo-sample.html#fig5.3.2","level":"5.3","list_caption":"Figure: BookInfo应用页面","alt":"BookInfo应用页面","nro":19,"url":"bookinfo-pages.png","index":2,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"BookInfo应用页面","attributes":{},"skip":false,"key":"5.3.2"},{"backlink":"install/deploy-kiali.html#fig5.4.1","level":"5.4","list_caption":"Figure: Kiali Graph","alt":"Kiali Graph","nro":20,"url":"kiali-graph.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Kiali Graph","attributes":{},"skip":false,"key":"5.4.1"},{"backlink":"traffic/crd/virtual-service.html#fig6.2.1.1","level":"6.2.1","list_caption":"Figure: VirtualService流程图","alt":"VirtualService流程图","nro":21,"url":"virtualservice.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"VirtualService流程图","attributes":{},"skip":false,"key":"6.2.1.1"},{"backlink":"traffic/crd/virtual-service.html#fig6.2.1.2","level":"6.2.1","list_caption":"Figure: VirtualService 资源配置项","alt":"VirtualService 资源配置项","nro":22,"url":"virtualservice-configuration.png","index":2,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"VirtualService 资源配置项","attributes":{},"skip":false,"key":"6.2.1.2"},{"backlink":"traffic/crd/gateway.html#fig6.2.3.1","level":"6.2.3","list_caption":"Figure: Gateway流程图","alt":"Gateway流程图","nro":23,"url":"gateway.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"Gateway流程图","attributes":{},"skip":false,"key":"6.2.3.1"},{"backlink":"traffic/crd/service-entry.html#fig6.2.4.1","level":"6.2.4","list_caption":"Figure: ServiceEntry流程图","alt":"ServiceEntry流程图","nro":24,"url":"service-entry.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"ServiceEntry流程图","attributes":{},"skip":false,"key":"6.2.4.1"},{"backlink":"traffic/crd/envoy-filter.html#fig6.2.5.1","level":"6.2.5","list_caption":"Figure: EnvoyFilter 资源配置项","alt":"EnvoyFilter 资源配置项","nro":25,"url":"envoyfilter-configuration.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"EnvoyFilter 资源配置项","attributes":{},"skip":false,"key":"6.2.5.1"},{"backlink":"traffic/gray-release.html#fig6.13.1","level":"6.13","list_caption":"Figure: 灰度发布","alt":"灰度发布","nro":26,"url":"gray-release.png","index":1,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"灰度发布","attributes":{},"skip":false,"key":"6.13.1"},{"backlink":"traffic/gray-release.html#fig6.13.2","level":"6.13","list_caption":"Figure: 灰度发布示例图","alt":"灰度发布示例图","nro":27,"url":"gray-release-demo.svg","index":2,"caption_template":"图 _PAGE_LEVEL_._PAGE_IMAGE_NUMBER_：_CAPTION_","label":"灰度发布示例图","attributes":{},"skip":false,"key":"6.13.2"}]},"title":"Istio Handbook - Istio 实践手册","language":"zh-hans","links":{"sidebar":{"xcbeyond个人博客":"https://xcbeyond.cn/"}},"gitbook":"*","description":"Istio Handbook - Istio 实践手册，本文记录了本人从零开始接触 Istio 的学习历程，从开发者的视角来看，将日常学习内容进行总结和分享。从服务网格概念出发，将逐步渗透到 Istio 具体细节中来，旨在帮助 Istio 学习者、使用者快速掌握相关知识点，可作为 Istio 学习、实践手册。"},"file":{"path":"traffic/crd/envoy-filter.md","mtime":"2022-08-13T04:59:03.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-08-13T05:01:55.789Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
