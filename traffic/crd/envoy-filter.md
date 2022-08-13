@@ -78,75 +78,73 @@ OWASP(Open Web Application Security Project) 提供了最佳实践指南和编�
    apiVersion: networking.istio.io/v1alpha3
    kind: EnvoyFilter
    metadata:
-      name: ef-add-response-headers-into-sidecar
+     name: ef-add-response-headers-into-sidecar
    spec:
-   workloadSelector:
-      # select by label in the same namespace
-      labels:
+     workloadSelector:
+       # select by label in the same namespace
+       labels:
          app: helloworld
-   configPatches:
-      # The Envoy config you want to modify
-   - applyTo: HTTP_FILTER
-      match:
+     configPatches:
+       # The Envoy config you want to modify
+     - applyTo: HTTP_FILTER
+       match:
          context: SIDECAR_INBOUND
-         proxy:
-         proxyVersion: '^1\.9.*'
          listener:
-         filterChain:
-            filter:
+           filterChain:
+             filter:
                name: "envoy.filters.network.http_connection_manager"
                subFilter:
-               name: "envoy.filters.http.router"
-      patch:
+                 name: "envoy.filters.http.router"
+       patch:
          operation: INSERT_BEFORE
          value: # lua filter specification
-         name: envoy.lua
-         typed_config:
-            "@type": "type.googleapis.com/envoy.extensions.filters.http.lua.v3.Lua"
-            inlineCode: |-
+           name: envoy.lua
+           typed_config:
+             "@type": "type.googleapis.com/envoy.extensions.filters.http.lua.v3.Lua"
+             inlineCode: |-
                function envoy_on_response(response_handle)
-                  function hasFrameAncestors(rh)
-                  s = rh:headers():get("Content-Security-Policy");
-                  delimiter = ";";
-                  defined = false;
-                  for match in (s..delimiter):gmatch("(.-)"..delimiter) do
-                     match = match:gsub("%s+", "");
-                     if match:sub(1, 15)=="frame-ancestors" then
-                     return true;
-                     end
-                  end
-                  return false;
-                  end
-                  if not response_handle:headers():get("Content-Security-Policy") then
-                  csp = "frame-ancestors none;";
-                  response_handle:headers():add("Content-Security-Policy", csp);
-                  elseif response_handle:headers():get("Content-Security-Policy") then
-                  if not hasFrameAncestors(response_handle) then
-                     csp = response_handle:headers():get("Content-Security-Policy");
-                     csp = csp .. ";frame-ancestors none;";
-                     response_handle:headers():replace("Content-Security-Policy", csp);
-                  end
-                  end
-                  if not response_handle:headers():get("X-Frame-Options") then
-                  response_handle:headers():add("X-Frame-Options", "deny");
-                  end
-                  if not response_handle:headers():get("X-XSS-Protection") then
-                  response_handle:headers():add("X-XSS-Protection", "1; mode=block");
-                  end
-                  if not response_handle:headers():get("X-Content-Type-Options") then
-                  response_handle:headers():add("X-Content-Type-Options", "nosniff");
-                  end
-                  if not response_handle:headers():get("Referrer-Policy") then
-                  response_handle:headers():add("Referrer-Policy", "no-referrer");
-                  end
-                  if not response_handle:headers():get("X-Download-Options") then
-                  response_handle:headers():add("X-Download-Options", "noopen");
-                  end
-                  if not response_handle:headers():get("X-DNS-Prefetch-Control") then
-                  response_handle:headers():add("X-DNS-Prefetch-Control", "off");
-                  end
-                  if not response_handle:headers():get("Feature-Policy") then
-                  response_handle:headers():add("Feature-Policy",
+                   function hasFrameAncestors(rh)
+                   s = rh:headers():get("Content-Security-Policy");
+                   delimiter = ";";
+                   defined = false;
+                   for match in (s..delimiter):gmatch("(.-)"..delimiter) do
+                       match = match:gsub("%s+", "");
+                       if match:sub(1, 15)=="frame-ancestors" then
+                       return true;
+                       end
+                   end
+                   return false;
+                   end
+                   if not response_handle:headers():get("Content-Security-Policy") then
+                   csp = "frame-ancestors none;";
+                   response_handle:headers():add("Content-Security-Policy", csp);
+                   elseif response_handle:headers():get("Content-Security-Policy") then
+                   if not hasFrameAncestors(response_handle) then
+                       csp = response_handle:headers():get("Content-Security-Policy");
+                       csp = csp .. ";frame-ancestors none;";
+                       response_handle:headers():replace("Content-Security-Policy", csp);
+                   end
+                   end
+                   if not response_handle:headers():get("X-Frame-Options") then
+                   response_handle:headers():add("X-Frame-Options", "deny");
+                   end
+                   if not response_handle:headers():get("X-XSS-Protection") then
+                   response_handle:headers():add("X-XSS-Protection", "1; mode=block");
+                   end
+                   if not response_handle:headers():get("X-Content-Type-Options") then
+                   response_handle:headers():add("X-Content-Type-Options", "nosniff");
+                   end
+                   if not response_handle:headers():get("Referrer-Policy") then
+                   response_handle:headers():add("Referrer-Policy", "no-referrer");
+                   end
+                   if not response_handle:headers():get("X-Download-Options") then
+                   response_handle:headers():add("X-Download-Options", "noopen");
+                   end
+                   if not response_handle:headers():get("X-DNS-Prefetch-Control") then
+                   response_handle:headers():add("X-DNS-Prefetch-Control", "off");
+                   end
+                   if not response_handle:headers():get("Feature-Policy") then
+                   response_handle:headers():add("Feature-Policy",
                                                    "camera 'none';"..
                                                    "microphone 'none';"..
                                                    "geolocation 'none';"..
@@ -154,12 +152,11 @@ OWASP(Open Web Application Security Project) 提供了最佳实践指南和编�
                                                    "payment 'none';"..
                                                    "speaker 'none';"..
                                                    "usb 'none';");
-                  end
-                  if response_handle:headers():get("X-Powered-By") then
-                  response_handle:headers():remove("X-Powered-By");
-                  end
+                   end
+                   if response_handle:headers():get("X-Powered-By") then
+                   response_handle:headers():remove("X-Powered-By");
+                   end
                end
-
    ```
 
 2. 验证。
@@ -205,75 +202,73 @@ ingress 上生效。
    apiVersion: networking.istio.io/v1alpha3
    kind: EnvoyFilter
    metadata:
-      name: ef-add-response-headers-into-ingressgateway
+     name: ef-add-response-headers-into-ingressgateway
    spec:
-   workloadSelector:
-      # select by label in the same namespace
-      labels:
+     workloadSelector:
+       # select by label in the same namespace
+       labels:
          istio: ingressgateway
-   configPatches:
-      # The Envoy config you want to modify
-   - applyTo: HTTP_FILTER
-      match:
+     configPatches:
+       # The Envoy config you want to modify
+     - applyTo: HTTP_FILTER
+       match:
          context: GATEWAY
-         proxy:
-         proxyVersion: '^1\.9.*'
          listener:
-         filterChain:
-            filter:
+           filterChain:
+             filter:
                name: "envoy.filters.network.http_connection_manager"
                subFilter:
-               name: "envoy.filters.http.router"
-      patch:
+                 name: "envoy.filters.http.router"
+       patch:
          operation: INSERT_BEFORE
          value: # lua filter specification
-         name: envoy.lua
-         typed_config:
-            "@type": "type.googleapis.com/envoy.extensions.filters.http.lua.v3.Lua"
-            inlineCode: |-
+           name: envoy.lua
+           typed_config:
+             "@type": "type.googleapis.com/envoy.extensions.filters.http.lua.v3.Lua"
+             inlineCode: |-
                function envoy_on_response(response_handle)
-                  function hasFrameAncestors(rh)
-                  s = rh:headers():get("Content-Security-Policy");
-                  delimiter = ";";
-                  defined = false;
-                  for match in (s..delimiter):gmatch("(.-)"..delimiter) do
-                     match = match:gsub("%s+", "");
-                     if match:sub(1, 15)=="frame-ancestors" then
-                     return true;
-                     end
-                  end
-                  return false;
-                  end
-                  if not response_handle:headers():get("Content-Security-Policy") then
-                  csp = "frame-ancestors none;";
-                  response_handle:headers():add("Content-Security-Policy", csp);
-                  elseif response_handle:headers():get("Content-Security-Policy") then
-                  if not hasFrameAncestors(response_handle) then
-                     csp = response_handle:headers():get("Content-Security-Policy");
-                     csp = csp .. ";frame-ancestors none;";
-                     response_handle:headers():replace("Content-Security-Policy", csp);
-                  end
-                  end
-                  if not response_handle:headers():get("X-Frame-Options") then
-                  response_handle:headers():add("X-Frame-Options", "deny");
-                  end
-                  if not response_handle:headers():get("X-XSS-Protection") then
-                  response_handle:headers():add("X-XSS-Protection", "1; mode=block");
-                  end
-                  if not response_handle:headers():get("X-Content-Type-Options") then
-                  response_handle:headers():add("X-Content-Type-Options", "nosniff");
-                  end
-                  if not response_handle:headers():get("Referrer-Policy") then
-                  response_handle:headers():add("Referrer-Policy", "no-referrer");
-                  end
-                  if not response_handle:headers():get("X-Download-Options") then
-                  response_handle:headers():add("X-Download-Options", "noopen");
-                  end
-                  if not response_handle:headers():get("X-DNS-Prefetch-Control") then
-                  response_handle:headers():add("X-DNS-Prefetch-Control", "off");
-                  end
-                  if not response_handle:headers():get("Feature-Policy") then
-                  response_handle:headers():add("Feature-Policy",
+                   function hasFrameAncestors(rh)
+                   s = rh:headers():get("Content-Security-Policy");
+                   delimiter = ";";
+                   defined = false;
+                   for match in (s..delimiter):gmatch("(.-)"..delimiter) do
+                       match = match:gsub("%s+", "");
+                       if match:sub(1, 15)=="frame-ancestors" then
+                       return true;
+                       end
+                   end
+                   return false;
+                   end
+                   if not response_handle:headers():get("Content-Security-Policy") then
+                   csp = "frame-ancestors none;";
+                   response_handle:headers():add("Content-Security-Policy", csp);
+                   elseif response_handle:headers():get("Content-Security-Policy") then
+                   if not hasFrameAncestors(response_handle) then
+                       csp = response_handle:headers():get("Content-Security-Policy");
+                       csp = csp .. ";frame-ancestors none;";
+                       response_handle:headers():replace("Content-Security-Policy", csp);
+                   end
+                   end
+                   if not response_handle:headers():get("X-Frame-Options") then
+                   response_handle:headers():add("X-Frame-Options", "deny");
+                   end
+                   if not response_handle:headers():get("X-XSS-Protection") then
+                   response_handle:headers():add("X-XSS-Protection", "1; mode=block");
+                   end
+                   if not response_handle:headers():get("X-Content-Type-Options") then
+                   response_handle:headers():add("X-Content-Type-Options", "nosniff");
+                   end
+                   if not response_handle:headers():get("Referrer-Policy") then
+                   response_handle:headers():add("Referrer-Policy", "no-referrer");
+                   end
+                   if not response_handle:headers():get("X-Download-Options") then
+                   response_handle:headers():add("X-Download-Options", "noopen");
+                   end
+                   if not response_handle:headers():get("X-DNS-Prefetch-Control") then
+                   response_handle:headers():add("X-DNS-Prefetch-Control", "off");
+                   end
+                   if not response_handle:headers():get("Feature-Policy") then
+                   response_handle:headers():add("Feature-Policy",
                                                    "camera 'none';"..
                                                    "microphone 'none';"..
                                                    "geolocation 'none';"..
@@ -281,11 +276,11 @@ ingress 上生效。
                                                    "payment 'none';"..
                                                    "speaker 'none';"..
                                                    "usb 'none';");
-                  end
-                  if response_handle:headers():get("X-Powered-By") then
-                  response_handle:headers():remove("X-Powered-By");
-                  end
-               end
+                   end
+                   if response_handle:headers():get("X-Powered-By") then
+                   response_handle:headers():remove("X-Powered-By");
+                   end
+               end  
    ```
 
 2. 验证。
@@ -343,42 +338,42 @@ ingress 上生效。
    apiVersion: networking.istio.io/v1alpha3
    kind: EnvoyFilter
    metadata:
-      name: ef-envoy-direct-response.yaml
+     name: ef-envoy-direct-response
    spec:
-   workloadSelector:
-      labels:
+     workloadSelector:
+       labels:
          app: helloworld
-   configPatches:
-   - applyTo: NETWORK_FILTER
-      match:
+     configPatches:
+     - applyTo: NETWORK_FILTER
+       match:
          context: SIDECAR_INBOUND
          listener:
-         filterChain:
-            filter:
+           filterChain:
+             filter:
                name: "envoy.filters.network.http_connection_manager"
-      patch:
+       patch:
          operation: REPLACE
          value:
-         name: envoy.filters.network.http_connection_manager
-         typed_config:
-            "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
-            stat_prefix: hello
-            route_config:
+           name: envoy.filters.network.http_connection_manager
+           typed_config:
+             "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+             stat_prefix: hello
+             route_config:
                name: my_first_route
                virtual_hosts:
                - name: direct_response_service
-               domains: ["helloworld.samples"]
-               routes:
-               - match:
+                 domains: ["helloworld.samples"]
+                 routes:
+                 - match:
                      prefix: "/"
-                  direct_response:
+                   direct_response:
                      status: 200
                      body:
-                     inline_string: "envoy direct response."
-            http_filters:
-            - name: envoy.filters.http.router
+                       inline_string: "envoy direct response."
+             http_filters:
+             - name: envoy.filters.http.router
                typed_config:
-               "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
+                 "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
    ```
 
 2. 验证。

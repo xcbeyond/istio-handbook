@@ -1,7 +1,7 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: EnvoyFilter
 metadata:
-  name: ef-envoy-direct-response.yaml
+  name: ef-envoy-direct-response
 spec:
   workloadSelector:
     labels:

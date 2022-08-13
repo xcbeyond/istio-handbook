@@ -12,8 +12,6 @@ spec:
   - applyTo: HTTP_FILTER
     match:
       context: GATEWAY
-      proxy:
-        proxyVersion: '^1\.9.*'
       listener:
         filterChain:
           filter:
