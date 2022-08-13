@@ -76,4 +76,8 @@
 - [集成注册中心](integration/registry/integration-registry.md)
   - [集成 Consul](integration/registry/integration-consul.md)
 
+## 附录
+
+- [使用端口/协议](appendix/ports-used-by-istio.md)
+
 ## FAQ
