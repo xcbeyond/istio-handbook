@@ -45,18 +45,27 @@
 - [超时]()
 - [重试]()
 - [熔断](traffic/circuit-breaking.md)
-- [限流]()
+- [限流](traffic/ratelimit.md)
 - [故障注入](traffic/fault-injection.md)
+- [多协议](traffic/multi-protocol.md)
 - [灰度发布](traffic/gray-release.md)
 
 ## 安全
 
+- [安全](security/index.md)
 - [资源配置](security/crd/security-crd.md)
   - [RequestAuthentication](security/crd/request-authentication.md)
   - [PeerAuthentication](security/crd/peer-authentication.md)
   - [AuthorizationPolicy](security/crd/authorization-policy.md)
+- [认证](security/authentication.md)
+- [授权](security/authorization.md)
 
 ## 可观测性
+
+- [可观测性](observability/index.md)
+- [指标、监控和可视化](observability/metrics.md)
+- [分布式追踪](observability/tracing.md)
+- [日志](observability/logs.md)
 
 ## 扩展性
 
