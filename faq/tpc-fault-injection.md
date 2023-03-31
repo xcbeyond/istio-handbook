@@ -27,9 +27,9 @@
                   number: 6379
   ```
   
-  参考：
-  
-  1. [Help: Is it possible to inject faults in Redis with Envoy Redis Proxy?](https://github.com/istio/istio/issues/27064)
-  2. [Redis 流量管理](https://github.com/aeraki-mesh/aeraki/blob/master/docs/zh/redis.md)
-  3. [https://stackoverflow.com/questions/66941477/redis-fault-injection-using-istio-and-envoy-filter](redis fault injection using istio and envoy filter)
-  4. [How to Fault Injection for redis](https://discuss.istio.io/t/how-to-fault-injection-for-redis/2668)
+参考：
+
+1. [Help: Is it possible to inject faults in Redis with Envoy Redis Proxy?](https://github.com/istio/istio/issues/27064)
+2. [Redis 流量管理](https://github.com/aeraki-mesh/aeraki/blob/master/docs/zh/redis.md)
+3. [https://stackoverflow.com/questions/66941477/redis-fault-injection-using-istio-and-envoy-filter](redis fault injection using istio and envoy filter)
+4. [How to Fault Injection for redis](https://discuss.istio.io/t/how-to-fault-injection-for-redis/2668)
