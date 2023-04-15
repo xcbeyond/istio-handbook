@@ -82,5 +82,6 @@
 
 ## FAQ
 
+- [如何规范定义服务的协议类型](faq/how-does-the-specification-define-the-protocol-type-of-the-service.md)
 - [Redis、MySQL等注入边车后，无法访问问题](faq/redis-mysql-cannot-connect-to-the-sidecar-after-injection.md)
 - [TCP协议服务故障注入（如：redis）](faq/tpc-fault-injection.md)
