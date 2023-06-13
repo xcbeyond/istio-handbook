@@ -10,7 +10,11 @@
 
 通过配置上游主机的 `DestinationRule` 来实现，当我们在`DestinationRule`中配置了熔断([`ConnectionPoolSettings`](https://istio.io/latest/zh/docs/reference/config/networking/destination-rule/#ConnectionPoolSettings)、[OutlierDetection](https://istio.io/latest/docs/reference/config/networking/destination-rule/#OutlierDetection)）时，上游服务的`Sidecar`代理将会根据配置进行阻止。
 
-**`connectionPool`：**
+分为两种类型：
+
+**高并发熔断（`connectionPool`）：**
+
+限制最大并发访问数，超过并发限制后，返回503请求过多的错误异常。
 
 控制请求的最大数量，挂起请求，重试或者超时等。通过设置连接池 `connectionPool`的各项配置，来完成熔断，其中分为 `TCP` 和 `HTTP` 两类：
 
@@ -28,7 +32,9 @@
   * `IdleTimeout`：上游连接池连接的空闲超时。空闲超时被定义为没有活动请求的时间段。如果未设置，则没有空闲超时。当达到空闲超时时，连接将被关闭。注意，基于请求的超时意味着`HTTP/2` `ping` 将无法保持有效连接。适用于 `HTTP1.1` 和 `HTTP2` 连接。
   * `H2UpgradePolicy`
 
-**`outlierDetection`：**
+**异常服务熔断（`outlierDetection`）：**
+
+根据服务异常访问次数，在时间窗口 `baseEjectionTime` 内超过异常次数 `consecutive5xxErrors` 后，触发熔断，将服务实例剔除。在下个时间窗口，再次判断异常访问次数，触发新一轮的熔断。
 
 用来控制从负载均衡池中剔除不健康的实例，可以设置最小逐出时间和最大逐出百分比。
 
@@ -36,7 +42,9 @@
 * `interval`
 * `baseEjectionTime`
 
-## 2、示例
+## 高并发熔断示例
+
+验证超过设定并发后，触发的熔断现象。（返回503请求过多的错误异常）
 
 参考：<https://istio.io/latest/zh/docs/tasks/traffic-management/circuit-breaking/>
 
@@ -180,3 +188,7 @@
    ```
 
    可以看到 `upstream_rq_pending_overflow` 值 11，这意味着，目前为止已有 11 个调用被标记为熔断。
+
+## 异常服务熔断
+
+验证在设定熔断窗口内，服务异常次数超过设定值时，触发的异常服务熔断现象。
