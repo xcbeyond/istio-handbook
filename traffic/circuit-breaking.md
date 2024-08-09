@@ -42,7 +42,7 @@
 * `interval`
 * `baseEjectionTime`
 
-## 高并发熔断示例
+## 2、高并发熔断示例
 
 验证超过设定并发后，触发的熔断现象。（返回503请求过多的错误异常）
 
@@ -189,6 +189,56 @@
 
    可以看到 `upstream_rq_pending_overflow` 值 11，这意味着，目前为止已有 11 个调用被标记为熔断。
 
-## 异常服务熔断
+## 3、异常服务熔断
 
 验证在设定熔断窗口内，服务异常次数超过设定值时，触发的异常服务熔断现象。
+
+用 [consumer](https://github.com/xcbeyond/samples/blob/main/consumer-provider/deploy/consumer.yaml) 示例进行验证。
+
+1. 部署 `consumer` 示例。
+
+   ```sh
+
+   ```
+
+2. 配置熔断。
+  
+   创建一个 `DestinationRule`, 并配置 outlierDetection：
+
+    ```shell
+    $ kubectl apply -f - <<EOF
+    apiVersion: networking.istio.io/v1alpha3
+    kind: DestinationRule
+    metadata:
+      name: consumer
+    spec:
+      host: consumer
+      outlierDetection:
+        baseEjectionTime: 1m
+        consecutive5xxErrors: 3
+        interval: 1s
+        maxEjectionPercent: 100
+    EOF
+    ```
+
+3. 熔断验证。
+
+   进入另外一个容器内，调用consumer的异常接口 `/consumer/error`。
+
+   连续调用的前3次，都返回500的错误异常：
+
+    ```shell
+
+    ```
+  
+    > 上述500的错误，是服务内异常接口的返回。
+
+    第4次调用，返回结果如下：
+
+    ```shell
+
+    ```
+
+    > 上述返回结果，是由于在第4次调用时，触发了熔断条件（consecutive5xxErrors：3），将该实例剔除在服务之外，此时已经找不到健康的consumer服务了。过1分钟（baseEjectionTime: 1m）后，服务将恢复正常。
+
+上述验证结果，说明异常熔断符合预期。
