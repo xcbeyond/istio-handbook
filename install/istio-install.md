@@ -51,7 +51,7 @@ istioctl install --set profile=demo -y
 
 - **default**: 根据默认的[安装选项](https://istio.io/latest/docs/reference/config/installation-options/)启用组件 (建议用于生产部署)。
 - **demo**: 这一配置具有适度的资源需求，旨在展示 Istio 的功能。它适合运行 [Bookinfo](https://istio.io/latest/zh/docs/examples/bookinfo/) 应用程序和相关任务。 这是通过[快速开始](https://istio.io/latest/zh/docs/setup/getting-started/)指导安装的配置，但是您以后可以通过[自定义配置](https://istio.io/latest/zh/docs/setup/install/istioctl/#customizing-the-configuration) 启用其他功能来探索更高级的任务。此配置文件启用了高级别的追踪和访问日志，因此不适合进行性能测试。
-- **minimum**：与默认配置文件相同，但仅安装控制平面组件。这允许您使用单独的配置文件配置控制平面和数据平面组件（例如，网关）。
+- **minimal**：与默认配置文件相同，但仅安装控制平面组件。这允许您使用单独的配置文件配置控制平面和数据平面组件（例如，网关）。
 - **external**: 用于配置一个远程集群，由一个外部控制平面或通过控制平面主集群的多集群网格。
 - **empty**：不部署任何东西。这可以用作自定义配置的基本配置文件。
 - **preview**：预览配置文件包含实验性功能。这是为了探索 Istio 的新功能。不保证稳定性、安全性和性能 - 使用风险自负。
